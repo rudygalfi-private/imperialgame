@@ -13,6 +13,8 @@ Download: http://www.microsoft.com/express/vcsharp/
 
 = Local File Location =
 
+== Location ==
+
 Choose a directory on your local system to use for holding the source code and compiled binaries. These are some recommended ones based on your OS:
 
   * On Windows XP: {{{C:\Code\Imperial\}}}
@@ -24,6 +26,8 @@ If you wish to use something else, the directory should have a path with the fol
   * Short
   * Contain no spaces
   * Local to your user account
+
+== Structure ==
 
 We'll call whatever directory you choose {{{PROJROOT}}}.
 

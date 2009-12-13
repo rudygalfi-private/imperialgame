@@ -5,13 +5,7 @@
 
 This guide details a set of steps you can take to enlist in the project. It is highly recommended that you follow these steps to get up and running quickly, but you are *not required* to do so.
 
-= Development Environment =
-
-Use Visual C# 2008 Express Edition for development. You'll get some nice features like IntelliSense as well as consistency with the core build process.
-
-Download: http://www.microsoft.com/express/vcsharp/
-
-= Local File Location =
+= Local Files =
 
 == Location ==
 
@@ -31,7 +25,7 @@ If you wish to use something else, the directory should have a path with the fol
 
 We'll call whatever directory you choose {{{PROJROOT}}}.
 
-Within {{{PROJROOT}}}, you'll have the following directory structure:
+Within {{{PROJROOT}}}, you will have the following directory structure:
 
 {{{
 PROJROOT
@@ -44,7 +38,9 @@ PROJROOT\imperialgame\Imperial.csproj.user
 PROJROOT\Imperial.sln
 }}}
 
-*Imperial.sln* is a Visual Studio (VS) file that you can use to open up the project within VS. A solution can actually contain many projects, but we'll just have one.
+The important thing to note now is that you'll have 
+
+*Imperial.sln* is a Visual Studio (VS) file that you can use to open up the project within VS. A solution can actually contain many projects, but we'll just have one. (So technically, {{{PROJROOT}}} should be {{{SOLUTIONROOT}}} but whatever...)
 
 (And its name is...) *Imperial.csproj* is a file specific to the project. If you open it up, you'll see it contains a bunch of information related to the build process. We'll be examining this file later on. *Imperial.csproj.user* is a relatively unimportant file that contains user settings.
 
@@ -57,6 +53,42 @@ The *obj* directory contains intermediate files from the build process. Files in
 The current set of files that is source-controlled is {source files} and Imperial.csproj
 
 = Source Control =
+
+== Getting It ==
+
 As we're using Google Code, the source control system we're using is Subversion (a.k.a. "SVN" or "svn"). You can make your life easy by downloading and installing a Windows shell extension that lets you manage all interactions with SVN via Windows Explorer.
 
-Download: http://tortoisesvn.net/downloads
+You'll need to restart your computer to integrate the shell extensions. Do so as soon as possible as you'll need to start using those extensions in the following step.
+
+Download: http://tortoisesvn.net/downloads (Make sure you select the right version: 32- or 64-bit!)
+
+== Using It ==
+
+Navigate to {{{PROJROOT\imperialgame}}}. This directory is so named because it corresponds directly with the Google Code source path.
+
+Take a look at http://code.google.com/p/imperialgame/source/checkout to see the checkout process.
+
+To acquire the source for the first time, you'll need to do a checkout of the current repository. Navigate to {{{PROJROOT}}} and right-click on {{{imperialgame}}}. Locate the TortoiseSVN menu listing and hover to expose the Checkout option in a submenu. Click to bring up the Checkout dialog.
+
+Within the Checkout dialog there are two important fields; ensure that they are filled in correctly:
+
+  * URL of repository: https://imperialgame.googlecode.com/svn/trunk/
+  * Export directory: {{{PROJROOT}}}\imperialgame
+
+Ensure that the checkout is *fully recursive* and that you're using the *HEAD revision* before clicking OK to perform the checkout.
+
+During the checkout, you'll need to enter your *Google Code username* and an *auto-generated password* that can be found by clicking on a link on the above-listed checkout page.
+
+= Development Environment =
+
+Use Visual C# 2008 Express Edition for development. You'll get some nice features like IntelliSense as well as consistency with the core build process.
+
+Download: http://www.microsoft.com/express/vcsharp/
+
+= StyleCop =
+
+We'll be using StyleCop as a gatekeeper for good coding style and comments. It's currently implemented as an added step in the build process. If there are any things it wants you to change they will appear as warnings. *Please address all StyleCop issues prior to commit!*
+
+You can get the MSI (installer file) at the link below as well as download the documentation for the style rules. The documentation is helpful because it will explain errors in more detail than the build warning and propose fixes. Fixing StyleCop violations should be very mechanical.
+
+Download: http://code.msdn.microsoft.com/sourceanalysis/Release/ProjectReleases.aspx?ReleaseId=1425

@@ -15,9 +15,9 @@ Download: http://www.microsoft.com/express/vcsharp/
 
 Choose a directory on your local system to use for holding the source code and compiled binaries. These are some recommended ones based on your OS:
 
-* On Windows XP: C:\Code\Imperial\
-* On Windows Vista: C:\Users\{USERNAME}\Code\Imperial
-* On Windows 7: C:\Users\{USERNAME}\Code\Imperial
+  * On Windows XP: {{{C:\Code\Imperial\}}}
+  * On Windows Vista: {{{C:\Users\{USERNAME}\Code\Imperial}}}
+  * On Windows 7: {{{C:\Users\{USERNAME}\Code\Imperial}}}
 
 If you wish to use something else, the directory should have a path with the following characteristics:
 

@@ -1,0 +1,14 @@
+#summary Our Wiki Home Page.
+#labels Featured
+
+= Want to get started? =
+
+Check out CreatingAnEnlistment.
+
+= Trying to figure out the code base? =
+
+Check out ImportantFiles.
+
+= Want to help in design? =
+
+Check out GameObjects.

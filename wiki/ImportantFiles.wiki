@@ -1,0 +1,10 @@
+#summary Not all files are created equally. These are some of the more important ones.
+#labels Phase-Design,Phase-Implementation
+
+= Application.cs =
+
+An Application object is a single running instance of our executable. The *{{{Main}}}* method will be here to parse the command line. In the normal flow, we'll create a *{{{Game}}}* and make a call to *{{{Run()}}}* on it.
+
+= Game.cs =
+
+This is the *{{{Game}}}* object. The "main loop" is here under *{{{Run()}}}*.

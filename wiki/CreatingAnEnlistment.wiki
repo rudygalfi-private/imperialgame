@@ -34,8 +34,8 @@ PROJROOT
 PROJROOT\imperialgame
 PROJROOT\imperialgame\*bin*
 PROJROOT\imperialgame\*obj*
-_PROJROOT\imperialgame\*{source files}*_
-_PROJROOT\imperialgame\*Imperial.csproj*_
+PROJROOT\imperialgame\*{source files}*_
+PROJROOT\imperialgame\*Imperial.csproj*_
 PROJROOT\imperialgame\*Imperial.csproj.user*
 PROJROOT\*Imperial.sln*
 }}}

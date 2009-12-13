@@ -41,7 +41,7 @@
   </Target>
   <ItemGroup>
     <Compile Include="Bond.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="BondCollection.cs" />
     <Compile Include="Country.cs" />
     <Compile Include="BankAccount.cs" />
     <Compile Include="Rondel.cs" />

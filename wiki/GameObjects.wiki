@@ -1,0 +1,78 @@
+#summary A listing of the game objects we have or will need.
+#labels Featured
+
+Money (implemented on uint in units of millions -- should we make this into its own class for type safety?)
+
+MoneyCollection (can deposit, withdraw, zero, transfer, etc.)
+
+Bond (struct of {CountryName, FaceValue, InterestPayment})
+
+BondCollection (the set of bonds that a player or country possesses)
+
+BondMarket (the set of all bonds)
+
+Implementation of bonds is tough:
+  * Countries have a BondCollection and Players have a BondCollection. Bonds can move between collections.
+  * There is a single BondMarket and Bonds have another property, Owner, which negates the need for BondCollections
+  * Hybrid: BondMarket is a glorified BondCollection and Players have their own BondCollection (so bonds that players own are not in the "Market" -- might be the most realistic)
+
+TaxChip
+
+TaxChipCollection (could just be TaxChip[])
+
+Player
+    Name
+    MoneyCollection
+    BondCollection
+
+Country
+    CountryName
+    MoneyCollection
+    TaxChipCollection
+    RondelMarker
+    TaxationMarker
+    PowerMarker
+
+Rondel
+
+TaxationChart
+
+Bond
+
+BondCollection
+
+Rondel
+
+RondelMarker
+
+Map (implemented as a Graph)
+
+abstract Region
+
+abstract LandRegion : Region
+
+abstract SeaRegion : Region
+
+CountryRegion : LandRegion
+
+NeutralLandRegion : LandRegion
+
+NeutralSeaRegion : SeaRegion
+
+abstract Border (the graph "edges" that connect Regions)
+
+LandBorder : Border (land-to-land travel for armies)
+
+CoastalBorder : Border (sea-to-land or land-to-sea border only allowed in convoys)
+
+PortBorder : CoastalBorder (sea-to-land travel for fleets when entering sea)
+
+SeaBorder : Border (sea-to-sea travel for fleets)
+
+Unit
+    Region location
+    bool hostile
+
+Army : Unit
+
+Fleet : Unit

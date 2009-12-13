@@ -37,7 +37,7 @@ namespace Imperial
         /// Deposits the specified amount into the account.
         /// </summary>
         /// <param name="depositMoney">The amount to deposit.</param>
-        public void DepositMoney(uint depositMoney)
+        public void Deposit(uint depositMoney)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace Imperial
         /// <param name="withdrawalMoney">The amount to withdraw.</param>
         /// <param name="forceWithdrawal">Whether to force the withdrawl even if there are insufficient funds.</param>
         /// <returns>The actual amount withdrawn from the account even if there were insufficient funds.</returns>
-        public uint WithdrawMoney(uint withdrawalMoney, bool forceWithdrawal)
+        public uint Withdraw(uint withdrawalMoney, bool forceWithdrawal)
         {
             if (this.HasSufficientFunds(withdrawalMoney))
             {
@@ -96,8 +96,8 @@ namespace Imperial
         /// <returns>The actual amount transferred even if there were insufficient funds.</returns>
         public uint TransferMoneyToBankAccount(uint amount, BankAccount destination, bool forceTransfer)
         {
-            uint amountWithdrawn = this.WithdrawMoney(amount, forceTransfer);
-            destination.DepositMoney(amountWithdrawn);
+            uint amountWithdrawn = this.Withdraw(amount, forceTransfer);
+            destination.Deposit(amountWithdrawn);
             return amountWithdrawn;
         }
 

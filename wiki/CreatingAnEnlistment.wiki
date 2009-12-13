@@ -21,14 +21,15 @@ Choose a directory on your local system to use for holding the source code and c
 
 If you wish to use something else, the directory should have a path with the following characteristics:
 
-* Short
-* Contain no spaces
-* Local to your user account
+  * Short
+  * Contain no spaces
+  * Local to your user account
 
 We'll call whatever directory you choose PROJROOT.
 
 Within PROJROOT, you'll have the following directory structure:
 
+{{{
 PROJROOT
 PROJROOT\imperialgame
 PROJROOT\imperialgame\*bin*
@@ -37,6 +38,7 @@ _PROJROOT\imperialgame\*{source files}*_
 _PROJROOT\imperialgame\*Imperial.csproj*_
 PROJROOT\imperialgame\*Imperial.csproj.user*
 PROJROOT\*Imperial.sln*
+}}}
 
 *Imperial.sln* is a Visual Studio (VS) file that you can use to open up the project within VS. A solution can actually contain many projects, but we'll just have one.
 

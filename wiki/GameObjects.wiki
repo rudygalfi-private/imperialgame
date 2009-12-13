@@ -21,17 +21,17 @@ TaxChip
 TaxChipCollection (could just be TaxChip[])
 
 Player
-    Name
-    MoneyCollection
-    BondCollection
+  Name
+  MoneyCollection
+  BondCollection
 
 Country
-    CountryName
-    MoneyCollection
-    TaxChipCollection
-    RondelMarker
-    TaxationMarker
-    PowerMarker
+  CountryName
+  MoneyCollection
+  TaxChipCollection
+  RondelMarker
+  TaxationMarker
+  PowerMarker
 
 Rondel
 
@@ -70,8 +70,8 @@ PortBorder : CoastalBorder (sea-to-land travel for fleets when entering sea)
 SeaBorder : Border (sea-to-sea travel for fleets)
 
 Unit
-    Region location
-    bool hostile
+  Region location
+  bool hostile
 
 Army : Unit
 

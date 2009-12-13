@@ -32,12 +32,12 @@ Within {{{PROJROOT}}}, you'll have the following directory structure:
 {{{
 PROJROOT
 PROJROOT\imperialgame
-PROJROOT\imperialgame\*bin*
-PROJROOT\imperialgame\*obj*
-PROJROOT\imperialgame\*{source files}*_
-PROJROOT\imperialgame\*Imperial.csproj*_
-PROJROOT\imperialgame\*Imperial.csproj.user*
-PROJROOT\*Imperial.sln*
+PROJROOT\imperialgame\bin
+PROJROOT\imperialgame\obj
+PROJROOT\imperialgame\{source files}
+PROJROOT\imperialgame\Imperial.csproj
+PROJROOT\imperialgame\Imperial.csproj.user
+PROJROOT\Imperial.sln
 }}}
 
 *Imperial.sln* is a Visual Studio (VS) file that you can use to open up the project within VS. A solution can actually contain many projects, but we'll just have one.
@@ -50,7 +50,7 @@ The *obj* directory contains intermediate files from the build process. Files in
 
 *{source files}* describes all of the source files. In the future, this may actually be a collection of directories and subdirectories containing source files, but for now it's just a collection of files.
 
-The italicized items above are those that are part of the source control scheme
+The current set of files that is source-controlled is {source files} and Imperial.csproj
 
 = Source Control =
 As we're using Google Code, the source control system we're using is Subversion (a.k.a. "SVN" or "svn"). You can make your life easy by downloading and installing a Windows shell extension that lets you manage all interactions with SVN via Windows Explorer.

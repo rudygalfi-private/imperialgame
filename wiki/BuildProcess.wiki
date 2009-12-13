@@ -1,0 +1,5 @@
+#summary A guide to the build process.
+
+= Introduction =
+
+This article goes over some elements of the build process.

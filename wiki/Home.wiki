@@ -8,6 +8,7 @@ Check out CreatingAnEnlistment.
 = Need help with the tools? =
 
 Check out WorkingWithSVN.
+
 Check out DiffsAndMerges.
 
 = Trying to figure out the code base? =

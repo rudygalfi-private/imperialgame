@@ -1,0 +1,8 @@
+#summary TortoiseSVN is a graphical interface to our underlying source control, SVN. Here are some tips on working with it.
+
+The page below has some useful tips on working with SVN under common workflow scenarios.
+
+http://svnbook.red-bean.com/en/1.1/ch03s05.html
+
+Please note that this page discussed working with SVN directly from the command line, but the GUI commands of TortoiseSVN should translate fairly well. The thing to grasp are the actions in the workflow.
+

@@ -1,0 +1,32 @@
+#summary An overview of concepts related to diffs and merges.
+
+= Changes =
+
+There are two basic types of changes that can be performed on a file:
+
+  * Insertion: Adding text
+  * Deletion: Removing text
+
+If you combine these two changes as applied to the same string of text you get another type of change:
+
+  * Move: Deletion of some text in one place and insertion of that text in another place.
+
+When discussing these changes, you can do so at the level of a complete line or at the character level. 
+
+= Revisions, working copies, and conflicts =
+
+The basic premise of source control is that the revisions of a file are tracked. A revision is created when you commit a file to the source repository. A revision will encompass any number of insertions and deletions.
+
+When you being working with code, you'll do so from a certain revision (revXX). Then, you'll proceed to make any number of changes to a file, called a working copy (WC or revXX+). Only you'll have access to the changes described by your working copy until you decide to commit them. At that point, you'll create a new revision and your working copy turns into that new revision. The code changes between the revision you started from and the revision you create with your changes is called a diff.
+
+However, as you're working on a revision, not every change you're making is visible to others. For this reason, someone working in parallel on the same code revision can make their own set of changes. Whoever commits their changes first will not encounter any problems, but the person who commits their changes second may encounter a problem.
+
+The fundamental issue is that the person who commits second is no longer working from the most current revision. For this reason, before they can successfully commit, they will need to modify their code further such that it takes into account the changes introduced to the most current revision. This process is called resolving conflicts or merging.
+
+= Diffs =
+
+Here's a listing of some common types of diffs and what you'd use them for. (revXX comes before revYY and a + indicates a working copy of the preceding revision.)
+
+  * revXX to revXX+: The changes you would introduce if you were to commit
+  * revXX to revYY: The changes a single commit introduced
+  * revXX to revYY+: The changes you would introduce after resolving conflicts with intervening revisions

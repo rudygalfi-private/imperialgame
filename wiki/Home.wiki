@@ -7,7 +7,7 @@ Check out CreatingAnEnlistment.
 
 = Need help with the tools? =
 
-Check out WorkingWithSVN.
+Check out [WorkingWithSVN].
 
 Check out DiffsAndMerges.
 

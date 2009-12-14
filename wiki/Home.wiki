@@ -5,6 +5,10 @@
 
 Check out CreatingAnEnlistment.
 
+= Need help with the tools? =
+
+Check out DiffsAndMerges.
+
 = Trying to figure out the code base? =
 
 Check out ImportantFiles.
@@ -12,3 +16,7 @@ Check out ImportantFiles.
 = Want to help in design? =
 
 Check out GameObjects.
+
+= Want to configure your development environment? =
+
+Check out ViewersAndEditors.

@@ -1,0 +1,28 @@
+#summary Some other code viewers and editors to consider using.
+
+= Introduction =
+
+There's a case to be made for using some non-default viewers/editors.
+
+= Diffing and Merging =
+
+Consider using SourceGear's DiffMerge. It is lightweight and has a decent interface.
+
+Download: http://www.sourcegear.com/diffmerge/downloads.html
+
+To set it up:
+
+Right-click on any source file to expose the TortoiseSVN menu. Click on Settings.
+
+In the left-hand navigation, find the External Programs section.
+
+  * Under Diff Viewer, there are two places to select "External" and enter a path of C:\Program Files (x86)\SourceGear\DiffMerge\DiffMerge.exe. (Substitute your own path to the location of DiffMerge.exe if needed.)
+  * UnderMerge too, there is one place to select "External" and enter a path of C:\Program Files (x86)\SourceGear\DiffMerge\DiffMerge.exe. (Substitute your own path to the location of DiffMerge.exe if needed.
+
+Now, when you select any diff or merge action within TortoiseSVN, it will launch this (better) program!
+
+= Text Editors =
+
+Consider Notepad2 for the miscellaneous quick text editing (options files like .csproj).
+
+Download: http://www.flos-freeware.ch/notepad2.html

@@ -7,7 +7,7 @@ namespace Imperial
     /// <summary>
     /// Definition of the range of the allowable count of players for a single game.
     /// </summary>
-    public enum AllowablePlayerCount : uint
+    public enum AllowablePlayerCount
     {
         /// <summary>
         /// Represents two players.
@@ -76,14 +76,14 @@ namespace Imperial
         public void Run()
         {
             // Flag to indicate when to exit this application.
-            bool quitApplicationFlag = false;
+            bool quitFlag = false;
 
             // Loop infinitely if we don't want to exit.
             do
             {
                 // Get a quit flag somehow.
             }
-            while (!quitApplicationFlag);
+            while (!quitFlag);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Imperial
     /// <summary>
     /// An ordered listing of all of the rondel spaces.
     /// </summary>
-    public enum RondelSpace : byte
+    public enum RondelSpace
     {
         /// <summary>
         /// The Factory space.
@@ -53,7 +53,7 @@ namespace Imperial
     /// <summary>
     /// A listing of all the game phases.
     /// </summary>
-    public enum Phase : byte
+    public enum Phase
     {
         /// <summary>
         /// The Factory phase.

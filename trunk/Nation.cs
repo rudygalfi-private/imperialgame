@@ -1,13 +1,13 @@
-﻿// <copyright file="Country.cs" company="Untitled">
+﻿// <copyright file="Nation.cs" company="Untitled">
 //     Copyright (c) Untitled. All rights reserved.
 // </copyright>
 
 namespace Imperial
 {
     /// <summary>
-    /// Defines the country names.
+    /// Defines the nation names.
     /// </summary>
-    public enum CountryName : short
+    public enum NationName
     {
         /// <summary>
         /// Name of Austria-Hungary
@@ -41,38 +41,38 @@ namespace Imperial
     }
 
     /// <summary>
-    /// Implements a country.
+    /// Implements a nation.
     /// </summary>
-    public class Country
+    public class Nation
     {
         /// <summary>
-        /// The name of this country.
+        /// The name of this nation.
         /// </summary>
-        private CountryName name;
+        private readonly NationName name;
         
         /// <summary>
-        /// The treasury (funds) possessed by this country.
+        /// The treasury (funds) possessed by this nation.
         /// </summary>
-        private BankAccount treasury;
+        private BankAccount treasury = null;
 
         /// <summary>
-        /// The unsold bonds held by this country.
+        /// The HomeProvinces of this Nation.
         /// </summary>
-        private BondCollection bonds;
+        private System.Collections.Generic.List<HomeProvince> homeProvinces = new System.Collections.Generic.List<HomeProvince>();
 
         /// <summary>
-        /// Moves this country to the designated space on the rondel.
+        /// Moves this nation to the designated space on the rondel.
         /// </summary>
         /// <param name="space">The rondel space to move to.</param>
         /// <returns>Whether the move to the space was successful.</returns>
         public bool MoveRondelMarker(RondelSpace space)
         {
-            // Check to make sure that the country can pay out when moving to Investor.
+            // Check to make sure that the nation can pay out when moving to Investor.
             return false;
         }
 
         /// <summary>
-        /// Pays all of the investors of this country using the country's treasury.
+        /// Pays all of the investors of this nation using the nation's treasury.
         /// </summary>
         /// <returns>Whether the payout to investors succeeded.</returns>
         public bool PayInvestors()

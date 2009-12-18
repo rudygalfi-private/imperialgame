@@ -10,9 +10,9 @@ namespace Imperial
     public struct Bond
     {
         /// <summary>
-        /// The name of the country that issued the bond.
+        /// The name of the nation that issued the bond.
         /// </summary>
-        public CountryName IssuingCountry;
+        public NationName IssuingNation;
 
         /// <summary>
         /// The face value of the bond when bought.

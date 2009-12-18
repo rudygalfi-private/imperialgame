@@ -62,9 +62,22 @@
   <Target Name="AfterBuild">
   </Target>
   <ItemGroup>
+    <Compile Include="ArmamentFacility.cs" />
     <Compile Include="Bond.cs" />
-    <Compile Include="BondCollection.cs" />
-    <Compile Include="Country.cs" />
+    <Compile Include="BondMarket.cs" />
+    <Compile Include="Army.cs" />
+    <Compile Include="Factory.cs" />
+    <Compile Include="HomeProvince.cs" />
+    <Compile Include="Military.cs" />
+    <Compile Include="Fleet.cs" />
+    <Compile Include="NeutralLandRegion.cs" />
+    <Compile Include="NeutralRegion.cs" />
+    <Compile Include="NeutralSeaRegion.cs" />
+    <Compile Include="Shipyard.cs" />
+    <Compile Include="TaxChip.cs" />
+    <Compile Include="Unit.cs" />
+    <Compile Include="Region.cs" />
+    <Compile Include="Nation.cs" />
     <Compile Include="BankAccount.cs" />
     <Compile Include="Rondel.cs" />
     <Compile Include="Game.cs" />
@@ -98,4 +111,3 @@
     </BootstrapperPackage>
   </ItemGroup>
 </Project>
-

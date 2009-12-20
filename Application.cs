@@ -16,7 +16,7 @@ namespace Imperial
         public static void Main(string[] args)
         {   
             // Figure out the number of players.
-            AllowablePlayerCount? allowedCountOfPlayers = null;
+            GameAllowablePlayerCount? allowedCountOfPlayers = null;
 
             // The number of command line parameters tells us if we have had the number of players defined.
             if (args.Length == 1)
@@ -25,7 +25,7 @@ namespace Imperial
             }
 
             // Create the game.
-            Game gameToPlay = new Game(allowedCountOfPlayers ?? AllowablePlayerCount.Two);
+            Game gameToPlay = new Game(allowedCountOfPlayers ?? GameAllowablePlayerCount.Two);
             
             // And run it.
             gameToPlay.Run();
@@ -36,33 +36,37 @@ namespace Imperial
         /// </summary>
         /// <param name="stringCountOfPlayers">A string representing the number of players.</param>
         /// <returns>The Allowable PlayerCount corresponding to the given string or null if no match can be found.</returns>
-        public static AllowablePlayerCount? AllowablePlayerCountFromString(string stringCountOfPlayers)
+        public static GameAllowablePlayerCount? AllowablePlayerCountFromString(string stringCountOfPlayers)
         {
             // We have had the number of players specified. Try reading it.
             uint convertedCountOfPlayers = 0;
             bool conversionSucceeded = uint.TryParse(stringCountOfPlayers, out convertedCountOfPlayers);
 
             // If the conversion succeeded, try to match it to a valid player count.
-            AllowablePlayerCount? matchedCountOfPlayers = null;
+            GameAllowablePlayerCount? matchedCountOfPlayers = null;
 
             if (conversionSucceeded)
             {
                 switch (convertedCountOfPlayers)
                 {
                     case 2:
-                        matchedCountOfPlayers = AllowablePlayerCount.Two;
+                        matchedCountOfPlayers = GameAllowablePlayerCount.Two;
                         break;
+
                     case 3:
-                        matchedCountOfPlayers = AllowablePlayerCount.Three;
+                        matchedCountOfPlayers = GameAllowablePlayerCount.Three;
                         break;
+
                     case 4:
-                        matchedCountOfPlayers = AllowablePlayerCount.Four;
+                        matchedCountOfPlayers = GameAllowablePlayerCount.Four;
                         break;
+
                     case 5:
-                        matchedCountOfPlayers = AllowablePlayerCount.Five;
+                        matchedCountOfPlayers = GameAllowablePlayerCount.Five;
                         break;
+
                     case 6:
-                        matchedCountOfPlayers = AllowablePlayerCount.Six;
+                        matchedCountOfPlayers = GameAllowablePlayerCount.Six;
                         break;
                 }
             }

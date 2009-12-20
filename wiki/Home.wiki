@@ -19,6 +19,10 @@ Check out ImportantFiles.
 
 Check out GameObjects.
 
+= Interested in standardizing implementation? =
+
+Checkout CodeStandards.
+
 = Want to configure your development environment? =
 
 Check out ViewersAndEditors.

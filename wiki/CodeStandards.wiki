@@ -1,0 +1,64 @@
+#summary Additional coding standards beyond what StyleCop enforces.
+#labels Phase-Implementation
+
+= Introduction =
+
+Having some additional coding standards beyond what StyleCop offers will be helpful. This page will serve as a place to collect those rules.
+
+In general, these rules will be based in a situation that can be much less mechanically solved than those that StyleCop presents. Still, the hope is that we can make some situations more mechanical by introducing these rules.
+
+= Initialization =
+
+== Declarations ==
+
+If a class has a member that will take on some very logical "default" value, use a declaration to enforce that:
+
+{{{
+private uint balance = 0;
+}}}
+
+Be cautious of doing this with {{{readonly}}} members as this will prevent constructor assignment:
+
+{{{
+private readonly NationName name;
+}}}
+
+= Naming =
+
+== Constructor parameters ==
+
+When assigning constructor parameters to private data members, use the same variable name for the parameters as their corresponding data member:
+
+{{{
+public BankAccount(uint balance)
+{
+    this.balance = balance;
+}
+}}}
+
+C# allows this seeming naming clash so long as we're willing to append our data members with {{{this.}}} each time we call them. This allows us to enforce public-facing well-named constructor parameters.
+
+= Operators =
+
+== Ternary operator ==
+
+The ternary operator ({{{?:}}}) can be used to avoid an if-else construct. It can be especially helpful when that if-else construct has branches that are very similar:
+
+{{{
+if (x == y)
+{
+    return doFunc(a, b, c, x);
+}
+else
+{
+    return doFunc(a, b, c, y);
+}
+}}}
+
+Instead, consider:
+
+{{{
+return doFunc(a, b, c, (x == y) ? x : y);
+}}}
+
+There are numerous other useful scenarios. However, when using the ternary operator, ensure that the readability of the code does not degrade and that the entire statement involving the operator will fit onto one line. You should be able to very clearly see the separate branches (on either side of the ":") in the ternary operator.

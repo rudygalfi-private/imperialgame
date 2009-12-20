@@ -38,6 +38,12 @@ public BankAccount(uint balance)
 
 C# allows this seeming naming clash so long as we're willing to append our data members with {{{this.}}} each time we call them. This allows us to enforce public-facing well-named constructor parameters.
 
+== Enumerations ==
+
+Enumerations should accompany a closely related class. Since that class will share the same file name, begin the enumeration name with that same class name. This gives more description to the enumeration and allows its containing file to be found easily.
+
+In the rare instance that an enumeration is not closely related to a class or is tied to two or more, place it in its own file named for the enumeration.
+
 = Program Flow =
 
 == Ternary operator ==

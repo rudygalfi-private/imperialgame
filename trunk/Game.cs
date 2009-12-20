@@ -7,7 +7,7 @@ namespace Imperial
     /// <summary>
     /// Definition of the range of the allowable count of players for a single game.
     /// </summary>
-    public enum AllowablePlayerCount
+    public enum GameAllowablePlayerCount
     {
         /// <summary>
         /// Represents two players.
@@ -43,13 +43,13 @@ namespace Imperial
         /// <summary>
         /// The count of players for this game.
         /// </summary>
-        private AllowablePlayerCount playerCount;
+        private GameAllowablePlayerCount playerCount;
 
         /// <summary>
         /// Initializes a new instance of the Game class.
         /// </summary>
         /// <param name="pc">The number of players for this game.</param>
-        public Game(AllowablePlayerCount pc)
+        public Game(GameAllowablePlayerCount pc)
         {
             this.playerCount = pc;
         }
@@ -57,7 +57,7 @@ namespace Imperial
         /// <summary>
         /// Gets or sets the count of players for this game.
         /// </summary>
-        public AllowablePlayerCount PlayerCount
+        public GameAllowablePlayerCount PlayerCount
         {
             get
             {

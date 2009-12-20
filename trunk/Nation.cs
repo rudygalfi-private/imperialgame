@@ -46,14 +46,9 @@ namespace Imperial
     public class Nation
     {
         /// <summary>
-        /// The name of this nation.
+        /// The name of this Nation.
         /// </summary>
         private readonly NationName name;
-        
-        /// <summary>
-        /// The treasury (funds) possessed by this nation.
-        /// </summary>
-        private BankAccount treasury = null;
 
         /// <summary>
         /// The HomeProvinces of this Nation.
@@ -61,14 +56,72 @@ namespace Imperial
         private System.Collections.Generic.List<HomeProvince> homeProvinces = new System.Collections.Generic.List<HomeProvince>();
 
         /// <summary>
-        /// Moves this nation to the designated space on the rondel.
+        /// The current leader of this Nation.
         /// </summary>
-        /// <param name="space">The rondel space to move to.</param>
-        /// <returns>Whether the move to the space was successful.</returns>
-        public bool MoveRondelMarker(RondelSpace space)
+        private Player leader = null;
+
+        /// <summary>
+        /// The treasury (funds) possessed by this nation.
+        /// </summary>
+        private BankAccount treasury = new BankAccount();
+
+        /// <summary>
+        /// The power factor of this Nation.
+        /// </summary>
+        private uint powerFactor = 0;
+
+        /// <summary>
+        /// Gets the current leader of this country.
+        /// </summary>
+        public Player Leader
         {
-            // Check to make sure that the nation can pay out when moving to Investor.
-            return false;
+            get
+            {
+                return this.leader;
+            }
+        }
+
+        /// <summary>
+        /// Gets the treasury of this Nation.
+        /// </summary>
+        public BankAccount Treasury
+        {
+            get
+            {
+                return this.treasury;
+            }
+        }
+
+        /// <summary>
+        /// Gets the power factor of this nation.
+        /// </summary>
+        public uint PowerFactor
+        {
+            get
+            {
+                return this.powerFactor;
+            }
+        }
+
+        /// <summary>
+        /// Build a Factory in the specified HomeProvince.
+        /// </summary>
+        public void BuildFactory()
+        {
+            // Ask where to build the Factory
+        }
+
+        /// <summary>
+        /// Produces Units in this Nation.
+        /// </summary>
+        public void ProduceUnits()
+        {
+            // In the future, we need to allow the user to specify where Units will be built.
+            // For now, just do it everywhere we can.
+            foreach (HomeProvince hp in this.homeProvinces)
+            {
+                hp.ProduceUnit();
+            }
         }
 
         /// <summary>

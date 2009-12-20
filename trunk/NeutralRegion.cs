@@ -12,6 +12,6 @@ namespace Imperial
         /// <summary>
         /// The controller of the region.
         /// </summary>
-        private TaxChip controller = null;
+        private TaxChip controller;
     }
 }

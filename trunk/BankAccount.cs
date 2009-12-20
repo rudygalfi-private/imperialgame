@@ -5,14 +5,37 @@
 namespace Imperial
 {
     /// <summary>
-    /// Implements a bank account.
+    /// Defines and implements a BankAccount.
     /// </summary>
+    /// <remarks>
+    ///     <para>The "Bank" has infinite money, hence this class does not show the Bank's side of
+    ///     transactions. In other words, non-zero-sum transactions such as Deposit and Withdraw
+    ///     take place with the Bank as the other party, while zero-sum transactions such as
+    ///     Transfer take place with some other BankAccount as the other party.</para>
+    ///     <para>The Bank must always be fully paid.</para>
+    /// </remarks>
     public class BankAccount
     {
         /// <summary>
         /// The balance of the bank account.
         /// </summary>
-        private uint balance;
+        private uint balance = 0;
+
+        /// <summary>
+        /// Initializes a new instance of the BankAccount class with zero balance.
+        /// </summary>
+        public BankAccount() : this(0)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the BankAccount class with the specified initial balance.
+        /// </summary>
+        /// <param name="balance">The initial balance of the BankAccount.</param>
+        public BankAccount(uint balance)
+        {
+            this.balance = balance;
+        }
 
         /// <summary>
         /// Gets the balance.
@@ -36,39 +59,43 @@ namespace Imperial
         /// <summary>
         /// Deposits the specified amount into the account.
         /// </summary>
-        /// <param name="depositMoney">The amount to deposit.</param>
-        public void Deposit(uint depositMoney)
+        /// <param name="depositAmount">The amount to deposit.</param>
+        /// <returns>The amount deposited.</returns>
+        /// <exception cref="System.ArithmeticException">Throws an exception if the amount deposited causes the account balance to overflow.</exception>
+        public uint Deposit(uint depositAmount)
         {
             try
             {
-                this.balance += depositMoney;
+                return this.balance += depositAmount;
             }
-            catch (System.OverflowException e)
+            catch (System.ArithmeticException e)
             {
                 System.Console.WriteLine(e.StackTrace);
+                return 0;
             }
         }
 
         /// <summary>
         /// Withdraws the specified amount from the account.
         /// </summary>
-        /// <param name="withdrawalMoney">The amount to withdraw.</param>
-        /// <param name="forceWithdrawal">Whether to force the withdrawl even if there are insufficient funds.</param>
+        /// <param name="withdrawalRequestAmount">The amount to withdraw.</param>
+        /// <param name="withdrawAsMuchAsPossible">Whether to withdraw the remaining funds even if they are less than the original withdrawl amount.</param>
         /// <returns>The actual amount withdrawn from the account even if there were insufficient funds.</returns>
-        public uint Withdraw(uint withdrawalMoney, bool forceWithdrawal)
+        /// <remarks>
+        /// When forceWidthdrawl is false, the amount withdrawn will either be the amount requested or zero;
+        /// otherwise, the amount will be the remaining balance.
+        /// </remarks>
+        public uint Withdraw(uint withdrawalRequestAmount, bool withdrawAsMuchAsPossible)
         {
-            if (this.HasSufficientFunds(withdrawalMoney))
+            if (this.HasSufficientFunds(withdrawalRequestAmount))
             {
-                this.balance -= withdrawalMoney;
-                return withdrawalMoney;
+                return this.Withdraw(withdrawalRequestAmount);
             }
             else
             {
-                if (forceWithdrawal)
+                if (withdrawAsMuchAsPossible)
                 {
-                    uint withdrawnMoney = this.balance;
-                    this.ZeroBalance();
-                    return withdrawnMoney;
+                    return this.WithdrawRemaining();
                 }
                 else
                 {
@@ -92,11 +119,11 @@ namespace Imperial
         /// </summary>
         /// <param name="amount">The amount to transfer.</param>
         /// <param name="destination">The destination account.</param>
-        /// <param name="forceTransfer">Whether to force the transfer even if there are insufficient funds in this account.</param>
+        /// <param name="withdrawAsMuchAsPossible">Whether to transfer the remaining funds even if they are less than the original transfer amount.</param>
         /// <returns>The actual amount transferred even if there were insufficient funds.</returns>
-        public uint TransferMoneyToBankAccount(uint amount, BankAccount destination, bool forceTransfer)
+        public uint TransferMoneyToBankAccount(uint amount, BankAccount destination, bool withdrawAsMuchAsPossible)
         {
-            uint amountWithdrawn = this.Withdraw(amount, forceTransfer);
+            uint amountWithdrawn = this.Withdraw(amount, withdrawAsMuchAsPossible);
             destination.Deposit(amountWithdrawn);
             return amountWithdrawn;
         }
@@ -106,11 +133,40 @@ namespace Imperial
         /// </summary>
         /// <param name="amount">The amount to transfer.</param>
         /// <param name="source">The source account.</param>
-        /// <param name="forceTransfer">Whether to force the transfer even if there are insufficient funds in the source account.</param>
+        /// <param name="withdrawAsMuchAsPossible">Whether to transfer the remaining funds even if they are less than the original transfer amount.</param>
         /// <returns>The actual amount transferred even if there were insufficient funds.</returns>
-        public uint TransferMoneyFromBankAccount(uint amount, BankAccount source, bool forceTransfer)
+        public uint TransferMoneyFromBankAccount(uint amount, BankAccount source, bool withdrawAsMuchAsPossible)
         {
-            return source.TransferMoneyToBankAccount(amount, this, forceTransfer);
+            return source.TransferMoneyToBankAccount(amount, this, withdrawAsMuchAsPossible);
+        }
+
+        /// <summary>
+        /// Withdraws the specified amount from this BankAccount.
+        /// </summary>
+        /// <param name="withdrawalAmount">The amount to withdraw.</param>
+        /// <returns>The amount withdrawn.</returns>
+        private uint Withdraw(uint withdrawalAmount)
+        {
+            try
+            {
+                return this.balance -= withdrawalAmount;
+            }
+            catch (System.ArithmeticException e)
+            {
+                System.Console.WriteLine(e.StackTrace);
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Withdraws the remaining money from this account.
+        /// </summary>
+        /// <returns>The amount withdrawn.</returns>
+        private uint WithdrawRemaining()
+        {
+            uint withdrawalAmount = this.balance;
+            this.ZeroBalance();
+            return withdrawalAmount;
         }
     }
 }

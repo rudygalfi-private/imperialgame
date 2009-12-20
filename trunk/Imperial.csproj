@@ -66,6 +66,7 @@
     <Compile Include="Bond.cs" />
     <Compile Include="BondMarket.cs" />
     <Compile Include="Army.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="HomeProvince.cs" />
     <Compile Include="Military.cs" />

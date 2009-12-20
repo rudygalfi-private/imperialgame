@@ -12,7 +12,7 @@ namespace Imperial
         /// <summary>
         /// The name of the nation that issued the bond.
         /// </summary>
-        public NationName IssuingNation;
+        public Nation IssuingNation;
 
         /// <summary>
         /// The face value of the bond when bought.

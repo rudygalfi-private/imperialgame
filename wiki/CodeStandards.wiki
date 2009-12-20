@@ -38,7 +38,7 @@ public BankAccount(uint balance)
 
 C# allows this seeming naming clash so long as we're willing to append our data members with {{{this.}}} each time we call them. This allows us to enforce public-facing well-named constructor parameters.
 
-= Operators =
+= Program Flow =
 
 == Ternary operator ==
 
@@ -62,3 +62,9 @@ return doFunc(a, b, c, (x == y) ? x : y);
 }}}
 
 There are numerous other useful scenarios. However, when using the ternary operator, ensure that the readability of the code does not degrade and that the entire statement involving the operator will fit onto one line. You should be able to very clearly see the separate branches (on either side of the ":") in the ternary operator.
+
+== Enums and switches ==
+
+Use them together! If an enum is coming into a function, it makes sense to handle all of the possible values of that enum in some way. Switches are a very methodical way of ensuring that this gets done.
+
+Exception: Flag-type enums (where the enum values are really representing binary values so that they can be OR'ed together) are exempt.

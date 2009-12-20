@@ -68,3 +68,27 @@ There are numerous other useful scenarios. However, when using the ternary opera
 Use them together! If an enum is coming into a function, it makes sense to handle all of the possible values of that enum in some way. Switches are a very methodical way of ensuring that this gets done.
 
 Exception: Flag-type enums (where the enum values are really representing binary values so that they can be OR'ed together) are exempt.
+
+= Syntax =
+
+== Comparisons ==
+
+When evaluating an expression involving a constance, place the constant on the left-hand side of the operator; for example:
+
+{{{
+if (0 == myValue)
+{
+    doSomething();
+}
+}}}
+
+The rationale is that you'll generate a compiler error if you ever end up with this (an assignment operator) instead:
+
+{{{
+if (0 = myValue)
+{
+    doSomething();
+}
+}}}
+
+This is really only critically important to equality comparisons, but it's worth applying to everything because you never know when your {{{<=}}} might turn into an {{{=}}} by accident!

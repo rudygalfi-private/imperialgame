@@ -73,7 +73,7 @@ Exception: Flag-type enums (where the enum values are really representing binary
 
 == Comparisons ==
 
-When evaluating an expression involving a constance, place the constant on the left-hand side of the operator; for example:
+When evaluating an expression involving a constant, place the constant on the left-hand side of the operator; for example:
 
 {{{
 if (0 == myValue)

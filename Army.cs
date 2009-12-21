@@ -7,7 +7,7 @@ namespace Imperial
     /// <summary>
     /// Defines and implements an Army, a type of Unit.
     /// </summary>
-    public class Army : Unit
+    public sealed class Army : Unit
     {
         /// <summary>
         /// Moves this Army to the specified Region.

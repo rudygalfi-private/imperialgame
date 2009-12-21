@@ -7,7 +7,7 @@ namespace Imperial
     /// <summary>
     /// Defines and implements a Shipyard, which is a type of Factory.
     /// </summary>
-    public class Shipyard : Factory
+    public sealed class Shipyard : Factory
     {
         /// <summary>
         /// Produces a Fleet.

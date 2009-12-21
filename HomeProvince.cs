@@ -7,7 +7,7 @@ namespace Imperial
     /// <summary>
     /// Defines a Home Province, which is a type of Region.
     /// </summary>
-    public class HomeProvince : Region
+    public sealed class HomeProvince : Region
     {
         /// <summary>
         /// The type of Factory that this HomeProvince can build.

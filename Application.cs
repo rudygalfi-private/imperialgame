@@ -7,7 +7,7 @@ namespace Imperial
     /// <summary>
     /// Implements an application to play Imperial.
     /// </summary>
-    public class Application
+    public sealed class Application
     {
         /// <summary>
         /// Parse any command line arguments to set up this GameInstance and run the game.
@@ -16,16 +16,16 @@ namespace Imperial
         public static void Main(string[] args)
         {   
             // Figure out the number of players.
-            GameAllowablePlayerCount? allowedCountOfPlayers = null;
+            GamePlayerCount? allowedCountOfPlayers = null;
 
             // The number of command line parameters tells us if we have had the number of players defined.
             if (args.Length == 1)
             {
-                allowedCountOfPlayers = Application.AllowablePlayerCountFromString(args[0]);
+                allowedCountOfPlayers = Application.PlayerCountFromString(args[0]);
             }
 
             // Create the game.
-            Game gameToPlay = new Game(allowedCountOfPlayers ?? GameAllowablePlayerCount.Two);
+            Game gameToPlay = new Game(allowedCountOfPlayers ?? GamePlayerCount.Two);
             
             // And run it.
             gameToPlay.Run();
@@ -36,37 +36,37 @@ namespace Imperial
         /// </summary>
         /// <param name="stringCountOfPlayers">A string representing the number of players.</param>
         /// <returns>The Allowable PlayerCount corresponding to the given string or null if no match can be found.</returns>
-        public static GameAllowablePlayerCount? AllowablePlayerCountFromString(string stringCountOfPlayers)
+        public static GamePlayerCount? PlayerCountFromString(string stringCountOfPlayers)
         {
             // We have had the number of players specified. Try reading it.
             uint convertedCountOfPlayers = 0;
             bool conversionSucceeded = uint.TryParse(stringCountOfPlayers, out convertedCountOfPlayers);
 
             // If the conversion succeeded, try to match it to a valid player count.
-            GameAllowablePlayerCount? matchedCountOfPlayers = null;
+            GamePlayerCount? matchedCountOfPlayers = null;
 
             if (conversionSucceeded)
             {
                 switch (convertedCountOfPlayers)
                 {
                     case 2:
-                        matchedCountOfPlayers = GameAllowablePlayerCount.Two;
+                        matchedCountOfPlayers = GamePlayerCount.Two;
                         break;
 
                     case 3:
-                        matchedCountOfPlayers = GameAllowablePlayerCount.Three;
+                        matchedCountOfPlayers = GamePlayerCount.Three;
                         break;
 
                     case 4:
-                        matchedCountOfPlayers = GameAllowablePlayerCount.Four;
+                        matchedCountOfPlayers = GamePlayerCount.Four;
                         break;
 
                     case 5:
-                        matchedCountOfPlayers = GameAllowablePlayerCount.Five;
+                        matchedCountOfPlayers = GamePlayerCount.Five;
                         break;
 
                     case 6:
-                        matchedCountOfPlayers = GameAllowablePlayerCount.Six;
+                        matchedCountOfPlayers = GamePlayerCount.Six;
                         break;
                 }
             }

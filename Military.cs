@@ -7,7 +7,7 @@ namespace Imperial
     /// <summary>
     /// Defines and implements a Military.
     /// </summary>
-    public class Military
+    public sealed class Military
     {
         /// <summary>
         /// Fleets in the Military.

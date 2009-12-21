@@ -7,7 +7,7 @@ namespace Imperial
     /// <summary>
     /// Defines and implements a tax ship.
     /// </summary>
-    public class TaxChip
+    public sealed class TaxChip
     {
         /// <summary>
         /// The owner of the tax chip.

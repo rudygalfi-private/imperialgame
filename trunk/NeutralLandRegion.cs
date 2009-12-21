@@ -7,7 +7,7 @@ namespace Imperial
     /// <summary>
     /// Defines and implements a NeutralLandRegion, which is a type of NeutralRegion.
     /// </summary>
-    public class NeutralLandRegion : NeutralRegion
+    public sealed class NeutralLandRegion : NeutralRegion
     {
     }
 }

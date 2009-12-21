@@ -7,7 +7,7 @@ namespace Imperial
     /// <summary>
     /// Defines and implements a Player.
     /// </summary>
-    public class Player
+    public sealed class Player
     {
         /// <summary>
         /// The name of the Player.
@@ -22,7 +22,18 @@ namespace Imperial
         /// <summary>
         /// The bonds held by this Player.
         /// </summary>
-        private System.Collections.Generic.List<Bond> bonds;
+        private readonly System.Collections.Generic.List<Bond> bonds = new System.Collections.Generic.List<Bond>();
+
+        /// <summary>
+        /// Initializes a new instance of the Player class with the specified amount of money.
+        /// </summary>
+        /// <param name="name">The name of this Player.</param>
+        /// <param name="initialMoney">The initial amount of money for this Player.</param>
+        public Player(string name, uint initialMoney)
+        {
+            this.name = name;
+            this.money = new BankAccount(initialMoney);
+        }
 
         /// <summary>
         /// Gets the name of this player.

@@ -10,7 +10,7 @@ namespace Imperial
     /// <remarks>
     /// There is only one BondMarket allowed at a time.
     /// </remarks>
-    public class BondMarket
+    public sealed class BondMarket
     {
         /// <summary>
         /// The instance of the BondMarket.

@@ -71,7 +71,7 @@ namespace Imperial
     /// <summary>
     /// Implements the rondel.
     /// </summary>
-    public class Rondel
+    public sealed class Rondel
     {
         /// <summary>
         /// The RondelPosition of each Nation on the Rondel.
@@ -99,7 +99,7 @@ namespace Imperial
         /// <param name="maximumMovementSpaces">The maximum number of spaces that can be moved on the Rondel at once.</param>
         /// <param name="freeMovementSpaces">The maximum number of spaces that can be moved on the Rondel at no cost.</param>
         /// <param name="extraMovementCost">The calculation for determining the cost of moving an additional space on the Rondel.</param>
-        private Rondel(uint maximumMovementSpaces, uint freeMovementSpaces, RondelExtraMovementCost extraMovementCost)
+        public Rondel(uint maximumMovementSpaces, uint freeMovementSpaces, RondelExtraMovementCost extraMovementCost)
         {
             this.maximumMovementSpaces = maximumMovementSpaces;
             this.freeMovementSpaces = freeMovementSpaces;

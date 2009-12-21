@@ -7,7 +7,7 @@ namespace Imperial
     /// <summary>
     /// Defines and implements a Fleet, a type of Unit.
     /// </summary>
-    public class Fleet : Unit
+    public sealed class Fleet : Unit
     {
         /// <summary>
         /// Moves this Fleet to the specified Region.

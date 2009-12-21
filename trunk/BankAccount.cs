@@ -14,7 +14,7 @@ namespace Imperial
     ///     Transfer take place with some other BankAccount as the other party.</para>
     ///     <para>The Bank must always be fully paid.</para>
     /// </remarks>
-    public class BankAccount
+    public sealed class BankAccount
     {
         /// <summary>
         /// The balance of the bank account.

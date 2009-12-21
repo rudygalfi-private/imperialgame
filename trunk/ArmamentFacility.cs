@@ -7,7 +7,7 @@ namespace Imperial
     /// <summary>
     /// Defines and implements an ArmamentFacility, which is a type of Factory.
     /// </summary>
-    public class ArmamentFacility : Factory
+    public sealed class ArmamentFacility : Factory
     {
         /// <summary>
         /// Produces an Army.

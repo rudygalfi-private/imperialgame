@@ -5,42 +5,6 @@
 namespace Imperial
 {
     /// <summary>
-    /// Defines the nation names.
-    /// </summary>
-    public enum NationName
-    {
-        /// <summary>
-        /// Name of Austria-Hungary
-        /// </summary>
-        AustriaHungary,
-
-        /// <summary>
-        /// Name of Italy
-        /// </summary>
-        Italy,
-
-        /// <summary>
-        /// Name of France
-        /// </summary>
-        France,
-
-        /// <summary>
-        /// Name of United Kingdom
-        /// </summary>
-        UnitedKingdom,
-
-        /// <summary>
-        /// Name of Germany
-        /// </summary>
-        Germany,
-
-        /// <summary>
-        /// Name of Russia
-        /// </summary>
-        Russia
-    }
-
-    /// <summary>
     /// The range of the total possible payout from the Investor action.
     /// </summary>
     /// <remarks>
@@ -68,6 +32,16 @@ namespace Imperial
     public sealed class Nation
     {
         /// <summary>
+        /// The XML element for a Nation.
+        /// </summary>
+        public const string XmlElement = "Nation";
+
+        /// <summary>
+        /// The XML element for a Nation's name.
+        /// </summary>
+        private const string XmlNameAttribute = "name";
+
+        /// <summary>
         /// The name of this Nation.
         /// </summary>
         private readonly string name;
@@ -75,7 +49,12 @@ namespace Imperial
         /// <summary>
         /// The HomeProvinces of this Nation.
         /// </summary>
-        private System.Collections.Generic.List<HomeProvince> homeProvinces = new System.Collections.Generic.List<HomeProvince>();
+        private readonly System.Collections.Generic.HashSet<HomeProvince> homeProvinces = new System.Collections.Generic.HashSet<HomeProvince>();
+
+        /// <summary>
+        /// The treasury (funds) possessed by this nation.
+        /// </summary>
+        private readonly BankAccount treasury = new BankAccount();
 
         /// <summary>
         /// The current leader of this Nation.
@@ -83,22 +62,61 @@ namespace Imperial
         private Player leader = null;
 
         /// <summary>
-        /// The treasury (funds) possessed by this nation.
-        /// </summary>
-        private BankAccount treasury = new BankAccount();
-
-        /// <summary>
         /// The power factor of this Nation.
         /// </summary>
         private uint powerFactor = 0;
 
         /// <summary>
-        /// Initializes a new instance of the Nation class with the specified Name.
+        /// Initializes a new instance of the Nation class according to the specified definition.
         /// </summary>
-        /// <param name="name">The name of the Nation.</param>
-        public Nation(string name)
+        /// <param name="definition">The XML definition of this Nation.</param>
+        public Nation(System.Xml.XmlNode definition)
         {
-            this.name = name;
+            if (((System.Xml.XmlElement)definition).HasAttribute(Nation.XmlNameAttribute))
+            {
+                this.name = ((System.Xml.XmlElement)definition).GetAttribute(Nation.XmlNameAttribute);
+                System.Console.WriteLine("\tName: {0}", this.name);
+            }
+            else
+            {
+                //// throw UnspecifiedRegionNameException
+            }
+
+            System.Xml.XmlNodeList shipyardDefinitions = ((System.Xml.XmlElement)definition).GetElementsByTagName(Shipyard.XmlElement);
+            foreach (System.Xml.XmlNode shipyardDefinition in shipyardDefinitions)
+            {
+                Shipyard loadedShipyard = new Shipyard(shipyardDefinition);
+                this.homeProvinces.Add(loadedShipyard);
+            }
+
+            System.Xml.XmlNodeList armamentsFacilityDefinitions = ((System.Xml.XmlElement)definition).GetElementsByTagName(ArmamentsFacility.XmlElement);
+            foreach (System.Xml.XmlNode armamentsFacilityDefinition in armamentsFacilityDefinitions)
+            {
+                ArmamentsFacility loadedArmamentsFacility = new ArmamentsFacility(armamentsFacilityDefinition);
+                this.homeProvinces.Add(loadedArmamentsFacility);
+            }
+        }
+
+        /// <summary>
+        /// Gets the Name of this Nation.
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                return this.name;
+            }
+        }
+
+        /// <summary>
+        /// Gets the HomeProvinces of this Nation.
+        /// </summary>
+        public System.Collections.Generic.HashSet<HomeProvince> HomeProvinces
+        {
+            get
+            {
+                return this.homeProvinces;
+            }
         }
 
         /// <summary>
@@ -207,9 +225,9 @@ namespace Imperial
         {
             // In the future, we need to allow the user to specify where Units will be built.
             // For now, just do it everywhere we can.
-            foreach (HomeProvince hp in this.homeProvinces)
+            foreach (HomeProvince homeProvince in this.homeProvinces)
             {
-                hp.ProduceUnit();
+                homeProvince.ProduceUnit(this);
             }
         }
 

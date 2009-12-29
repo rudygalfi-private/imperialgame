@@ -10,6 +10,14 @@ namespace Imperial
     public sealed class Army : Unit
     {
         /// <summary>
+        /// Initializes a new instance of the Army class with the specified allegiance.
+        /// </summary>
+        /// <param name="allegiance">The allegiance of the Army.</param>
+        public Army(Nation allegiance) : base(allegiance)
+        {
+        }
+
+        /// <summary>
         /// Moves this Army to the specified Region.
         /// </summary>
         /// <param name="region">The Region to which to move this Army.</param>

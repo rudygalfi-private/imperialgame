@@ -10,9 +10,23 @@ namespace Imperial
     public abstract class Unit
     {
         /// <summary>
+        /// The allegiance of this Unit.
+        /// </summary>
+        private readonly Nation allegiance;
+
+        /// <summary>
         /// Whether this unit has used its move for the turn.
         /// </summary>
         private bool hasMovedDuringTurn = false;
+
+        /// <summary>
+        /// Initializes a new instance of the Unit class with the specified allegiance.
+        /// </summary>
+        /// <param name="allegiance">The allegiance of this Unit.</param>
+        protected Unit(Nation allegiance)
+        {
+            this.allegiance = allegiance;
+        }
 
         /// <summary>
         /// Gets a value indicating whether this Unit has moved during a turn.

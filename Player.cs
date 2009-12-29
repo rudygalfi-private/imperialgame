@@ -22,7 +22,7 @@ namespace Imperial
         /// <summary>
         /// The bonds held by this Player.
         /// </summary>
-        private readonly System.Collections.Generic.List<Bond> bonds = new System.Collections.Generic.List<Bond>();
+        private readonly BondCollection bonds = new BondCollection();
 
         /// <summary>
         /// Initializes a new instance of the Player class with the specified amount of money.
@@ -63,14 +63,7 @@ namespace Imperial
         /// <returns>The calculated score.</returns>
         public uint CalculateScore()
         {
-            uint score = 0;
-
-            foreach (Bond b in this.bonds)
-            {
-                score += b.IssuingNation.PowerFactor * b.InterestPayment;
-            }
-
-            return score;
+            return this.bonds.CalculateValue() + this.money.Balance;
         }
     }
 }

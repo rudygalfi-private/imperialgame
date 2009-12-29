@@ -46,30 +46,37 @@ namespace Imperial
         private readonly GamePlayerCount playerCount;
 
         /// <summary>
+        /// The Map for this Game.
+        /// </summary>
+        private readonly Map map;
+
+        /// <summary>
         /// The Rondel for this Game.
         /// </summary>
         private readonly Rondel rondel = new Rondel(6, 3, RondelExtraMovementCost.Constant2);
 
         /// <summary>
-        /// The Nations for this Game.
-        /// </summary>
-        private readonly System.Collections.Generic.List<Nation> nations = new System.Collections.Generic.List<Nation>();
-
-        /// <summary>
         /// Initializes a new instance of the Game class.
         /// </summary>
+        /// <param name="mapFilePath">The path to the map file to load.</param>
         /// <param name="playerCount">The number of players for this game.</param>
-        public Game(GamePlayerCount playerCount)
+        public Game(string mapFilePath, GamePlayerCount playerCount)
         {
             this.playerCount = playerCount;
 
-            // Make all of the Nations, adding them in their appropriate order.
-            this.nations.Add(new Nation("Austria-Hungary"));
-            this.nations.Add(new Nation("Italy"));
-            this.nations.Add(new Nation("France"));
-            this.nations.Add(new Nation("United Kingdom"));
-            this.nations.Add(new Nation("Germany"));
-            this.nations.Add(new Nation("Russia"));
+            System.Xml.XmlDocument mapDefinitionDocument = new System.Xml.XmlDocument();
+            mapDefinitionDocument.Load(mapFilePath);
+
+            System.Xml.XmlNodeList maps = mapDefinitionDocument.GetElementsByTagName(Map.XmlElement);
+
+            if (1 == maps.Count)
+            {
+                this.map = new Map(maps.Item(0));
+            }
+            else
+            {
+                //// throw InvalidMapCountException
+            }
         }
 
         /// <summary>
@@ -80,6 +87,17 @@ namespace Imperial
             get
             {
                 return this.playerCount;
+            }
+        }
+
+        /// <summary>
+        /// Gets the Map of this Game.
+        /// </summary>
+        public Map Map
+        {
+            get
+            {
+                return this.map;
             }
         }
 
@@ -125,8 +143,8 @@ namespace Imperial
         /// </remarks>
         private Nation DiscernActingNation(uint turnNumber)
         {
-            uint nationCount = (uint)this.nations.Count;
-            return this.nations[(int)(turnNumber % nationCount)];
+            uint nationCount = (uint)this.map.Nations.Count;
+            return this.map.Nations[(int)(turnNumber % nationCount)];
         }
     }
 }

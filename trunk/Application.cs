@@ -14,7 +14,7 @@ namespace Imperial
         /// </summary>
         /// <param name="args">Command line arguments.</param>
         public static void Main(string[] args)
-        {   
+        {
             // Figure out the number of players.
             GamePlayerCount? allowedCountOfPlayers = null;
 
@@ -24,8 +24,11 @@ namespace Imperial
                 allowedCountOfPlayers = Application.PlayerCountFromString(args[0]);
             }
 
+            System.Console.Write("Absolute path of map file to load: ");
+            string mapFilePath = System.Console.ReadLine();
+
             // Create the game.
-            Game gameToPlay = new Game(allowedCountOfPlayers ?? GamePlayerCount.Two);
+            Game gameToPlay = new Game(mapFilePath, allowedCountOfPlayers ?? GamePlayerCount.Two);
             
             // And run it.
             gameToPlay.Run();

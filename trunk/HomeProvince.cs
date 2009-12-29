@@ -7,25 +7,44 @@ namespace Imperial
     /// <summary>
     /// Defines a Home Province, which is a type of Region.
     /// </summary>
-    public sealed class HomeProvince : Region
+    public abstract class HomeProvince : Region
     {
         /// <summary>
-        /// The type of Factory that this HomeProvince can build.
+        /// The XML attribute that describes whether this HomeProvince starts with a Factory.
         /// </summary>
-        private readonly FactoryType factoryType;
+        private const string XmlStartFactoryLoadAttribute = "start";
 
         /// <summary>
         /// The Factory of this HomeProvince.
         /// </summary>
-        private Factory factory = null;
+        private bool hasFactory = false;
 
         /// <summary>
-        /// Initializes a new instance of the HomeProvince class that can have a Factory of the specified type.
+        /// Initializes a new instance of the HomeProvince class according to the specified definition.
         /// </summary>
-        /// <param name="typeOfFactory">The type of Factory that this province can have.</param>
-        public HomeProvince(FactoryType typeOfFactory)
+        /// <param name="definition">The XML definition of this HomeProvince.</param>
+        public HomeProvince(System.Xml.XmlNode definition) : base(definition)
         {
-            this.factoryType = typeOfFactory;
+            if (((System.Xml.XmlElement)definition).HasAttribute(HomeProvince.XmlStartFactoryLoadAttribute))
+            {
+                if ("true" == ((System.Xml.XmlElement)definition).GetAttribute(HomeProvince.XmlStartFactoryLoadAttribute).ToLower())
+                {
+                    this.BuildFactory();
+                    System.Console.WriteLine("\tHas starting factory.");
+                }
+                else if ("false" == ((System.Xml.XmlElement)definition).GetAttribute(HomeProvince.XmlStartFactoryLoadAttribute).ToLower())
+                {
+                    System.Console.WriteLine("\tHas NO starting factory.");
+                }
+                else
+                {
+                    //// throw InvalidStartFactoryException
+                }
+            }
+            else
+            {
+                //// throw UnspecifiedStartFactoryException
+            }
         }
 
         /// <summary>
@@ -33,37 +52,21 @@ namespace Imperial
         /// </summary>
         public void BuildFactory()
         {
-            switch (this.factoryType)
-            {
-                case FactoryType.Shipyard:
-                    this.factory = new Shipyard();
-                    break;
-
-                case FactoryType.ArmamentFacility:
-                    this.factory = new ArmamentFacility();
-                    break;
-
-                default:
-                    //// InvalidFactoryTypeExpception
-                    break;
-            }
+            this.hasFactory = true;
         }
+
+        /// <summary>
+        /// Produces a Unit of the appropriate type for the given Nation.
+        /// </summary>
+        /// <param name="allegiance">The allegiance of the produced Unit.</param>
+        public abstract void ProduceUnit(Nation allegiance);
 
         /// <summary>
         /// Destroys the Factory of this HomeProvince.
         /// </summary>
-        public void DestroyFactory()
+        private void DestroyFactory()
         {
-            this.factory = null;
-        }
-
-        /// <summary>
-        /// Produces a Unit of the appropriate type.
-        /// </summary>
-        public void ProduceUnit()
-        {
-            Unit producedUnit = this.factory.Produce();
-            this.DomesticMilitary.Add(producedUnit);
+            this.hasFactory = false;
         }
     }
 }

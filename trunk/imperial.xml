@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Map>
+  <Nation name="Austria-Hungary">
+    <ArmamentsFacility name="Prague" start="false">
+      <Neighbors>
+        <Neighbor name="Berlin" />
+        <Neighbor name="Danzig" />
+        <Neighbor name="Warsaw" />
+        <Neighbor name="Lemborg" />
+        <Neighbor name="Budapest" />
+        <Neighbor name="Vienna" />
+        <Neighbor name="Munich" />
+      </Neighbors>
+    </ArmamentsFacility>
+    <ArmamentsFacility name="Lemborg" start="false">
+      <Neighbors>
+        <Neighbor name="Warsaw" />
+        <Neighbor name="Kiev" />
+        <Neighbor name="Romania" />
+        <Neighbor name="Budapest" />
+        <Neighbor name="Vienna" />
+        <Neighbor name="Prague" />
+      </Neighbors>
+    </ArmamentsFacility>
+    <ArmamentsFacility name="Vienna" start="true">
+      <Neighbors>
+        <Neighbor name="Munich" />
+        <Neighbor name="Prague" />
+        <Neighbor name="Budapest" />
+        <Neighbor name="Trieste" />
+        <Neighbor name="Venice" />
+      </Neighbors>
+    </ArmamentsFacility>
+    <ArmamentsFacility name="Budapest" start="true">
+      <Neighbors>
+        <Neighbor name="Prague" />
+        <Neighbor name="Lemborg" />
+        <Neighbor name="Romania" />
+        <Neighbor name="West Balkan" />
+        <Neighbor name="Trieste" />
+        <Neighbor name="Vienna" />
+      </Neighbors>
+    </ArmamentsFacility>
+    <Shipyard name="Trieste" start="false" port="Ionian Sea">
+      <Neighbors>
+        <Neighbor name="Vienna" />
+        <Neighbor name="Budapest" />
+        <Neighbor name="West Balkan" />
+        <Neighbor name="Ionian Sea" />
+        <Neighbor name="Venice" />
+      </Neighbors>
+    </Shipyard>
+  </Nation>
+  <Nation name="Italy">
+    <Shipyard name="Genoa" start="false" port="Western Mediterranean Sea">
+      <Neighbors>
+        <Neighbor name="Marseille" />
+        <Neighbor name="Vienna" />
+        <Neighbor name="Venice" />
+        <Neighbor name="Florence" />
+        <Neighbor name="Western Mediterranean Sea" />
+      </Neighbors>
+    </Shipyard>
+    <Shipyard name="Venice" start="false" port="Ionian Sea">
+      <Neighbors>
+        <Neighbor name="Genoa" />
+        <Neighbor name="Vienna" />
+        <Neighbor name="Trieste" />
+        <Neighbor name="Ionian Sea" />
+        <Neighbor name="Florence" />
+      </Neighbors>
+    </Shipyard>
+    <ArmamentsFacility name="Florence" start="false">
+      <Neighbors>
+        <Neighbor name="Genoa" />
+        <Neighbor name="Venice" />
+        <Neighbor name="Rome" />
+        <Neighbor name="Western Mediterranean Sea" />
+      </Neighbors>
+    </ArmamentsFacility>
+    <ArmamentsFacility name="Rome" start="true">
+      <Neighbors>
+        <Neighbor name="Florence" />
+        <Neighbor name="Venice" />
+        <Neighbor name="Ionian Sea" />
+        <Neighbor name="Naples" />
+        <Neighbor name="Western Mediterranean Sea" />
+      </Neighbors>
+    </ArmamentsFacility>
+    <Shipyard name="Naples" start="true" port="Western Mediterranean Sea">
+      <Neighbors>
+        <Neighbor name="Rome" />
+        <Neighbor name="Ionian Sea" />
+        <Neighbor name="Western Mediterranean Sea" />
+      </Neighbors>
+    </Shipyard>
+  </Nation>
+  <Nation name="France">
+    <ArmamentsFacility name="Paris" start="true">
+      <Neighbors>
+        <Neighbor name="English Channel" />
+        <Neighbor name="Brest" />
+        <Neighbor name="Dijon" />
+        <Neighbor name="Belgium" />
+      </Neighbors>
+    </ArmamentsFacility>
+    <Shipyard name="Brest" start="false" port="English Channel">
+      <Neighbors>
+        <Neighbor name="English Channel" />
+        <Neighbor name="Paris" />
+        <Neighbor name="Dijon" />
+        <Neighbor name="Bordeaux" />
+        <Neighbor name="Bay of Biscay" />
+      </Neighbors>
+    </Shipyard>
+    <Shipyard name="Bordeaux" start="true" port="Bay of Biscay">
+      <Neighbors>
+        <Neighbor name="Bay of Biscay" />
+        <Neighbor name="Brest" />
+        <Neighbor name="Dijon" />
+        <Neighbor name="Marseille" />
+        <Neighbor name="Spain" />
+      </Neighbors>
+    </Shipyard>
+    <ArmamentsFacility name="Dijon" start="false">
+      <Neighbors>
+        <Neighbor name="Paris" />
+        <Neighbor name="Belgium" />
+        <Neighbor name="Munich" />
+        <Neighbor name="Marseille" />
+        <Neighbor name="Bordeaux" />
+        <Neighbor name="Brest" />
+      </Neighbors>
+    </ArmamentsFacility>
+    <Shipyard name="Marseille" start="false" port="Western Mediterranean Sea">
+      <Neighbors>
+        <Neighbor name="Bordeaux" />
+        <Neighbor name="Dijon" />
+        <Neighbor name="Genoa" />
+        <Neighbor name="Western Mediterranean Sea" />
+        <Neighbor name="Spain" />
+      </Neighbors>
+    </Shipyard>
+  </Nation>
+  <Nation name="United Kingdom">
+    <Shipyard name="Dublin" start="false" port="North Atlantic">
+      <Neighbors>
+        <Neighbor name="North Atlantic" />
+      </Neighbors>
+    </Shipyard>
+    <Shipyard name="Liverpool" start="true" port="North Atlantic">
+      <Neighbors>
+        <Neighbor name="North Atlantic" />
+        <Neighbor name="Edinburgh" />
+        <Neighbor name="Mayfield" />
+        <Neighbor name="London" />
+      </Neighbors>
+    </Shipyard>
+    <Shipyard name="Edinburgh" start="false" port="North Sea">
+      <Neighbors>
+        <Neighbor name="North Sea" />
+        <Neighbor name="North Atlantic" />
+        <Neighbor name="Liverpool" />
+        <Neighbor name="London" />
+      </Neighbors>
+    </Shipyard>
+    <ArmamentsFacility name="Mayfield" start="false">
+      <Neighbors>
+        <Neighbor name="North Sea" />
+        <Neighbor name="Edinburgh" />
+        <Neighbor name="Liverpool" />
+        <Neighbor name="London" />
+      </Neighbors>
+    </ArmamentsFacility>
+    <Shipyard name="London" start="true" port="English Channel">
+      <Neighbors>
+        <Neighbor name="North Atlantic" />
+        <Neighbor name="North Sea" />
+        <Neighbor name="Liverpool" />
+        <Neighbor name="Mayfield" />
+        <Neighbor name="English Channel" />
+      </Neighbors>
+    </Shipyard>
+  </Nation>
+  <Nation name="Germany">
+    <Shipyard name="Hamburg" start="true" port="North Sea">
+      <Neighbors>
+        <Neighbor name="North Sea" />
+        <Neighbor name="Denmark" />
+        <Neighbor name="Baltic Sea" />
+        <Neighbor name="Berlin" />
+        <Neighbor name="Cologne" />
+        <Neighbor name="Holland" />
+      </Neighbors>
+    </Shipyard>
+    <ArmamentsFacility name="Berlin" start="true">
+      <Neighbors>
+        <Neighbor name="Baltic Sea" />
+        <Neighbor name="Danzig" />
+        <Neighbor name="Prague" />
+        <Neighbor name="Munich" />
+        <Neighbor name="Cologne" />
+        <Neighbor name="Hamburg" />
+      </Neighbors>
+    </ArmamentsFacility>
+    <Shipyard name="Danzig" start="false" port="Baltic Sea">
+      <Neighbors>
+        <Neighbor name="Baltic Sea" />
+        <Neighbor name="St. Petersburg" />
+        <Neighbor name="Warsaw" />
+        <Neighbor name="Prague" />
+        <Neighbor name="Berlin" />
+      </Neighbors>
+    </Shipyard>
+    <ArmamentsFacility name="Cologne" start="false">
+      <Neighbors>
+        <Neighbor name="Hamburg" />
+        <Neighbor name="Berlin" />
+        <Neighbor name="Munich" />
+        <Neighbor name="Belgium" />
+        <Neighbor name="Holland" />
+      </Neighbors>
+    </ArmamentsFacility>
+    <ArmamentsFacility name="Munich" start="false">
+      <Neighbors>
+        <Neighbor name="Cologne" />
+        <Neighbor name="Berlin" />
+        <Neighbor name="Prague" />
+        <Neighbor name="Vienna" />
+        <Neighbor name="Dijon" />
+        <Neighbor name="Belgium" />
+      </Neighbors>
+    </ArmamentsFacility>
+  </Nation>
+  <Nation name="Russia">
+    <Shipyard name="St. Petersburg" start="false" port="Baltic Sea">
+      <Neighbors>
+        <Neighbor name="Moscow" />
+        <Neighbor name="Warsaw" />
+        <Neighbor name="Danzig" />
+        <Neighbor name="Baltic Sea" />
+      </Neighbors>
+    </Shipyard>
+    <ArmamentsFacility name="Moscow" start="true">
+      <Neighbors>
+        <Neighbor name="St. Petersburg" />
+        <Neighbor name="Kiev" />
+        <Neighbor name="Warsaw" />
+      </Neighbors>
+    </ArmamentsFacility>
+    <ArmamentsFacility name="Warsaw" start="false">
+      <Neighbors>
+        <Neighbor name="St. Petersburg" />
+        <Neighbor name="Moscow" />
+        <Neighbor name="Kiev" />
+        <Neighbor name="Lemborg" />
+        <Neighbor name="Prague" />
+        <Neighbor name="Danzig" />
+      </Neighbors>
+    </ArmamentsFacility>
+    <ArmamentsFacility name="Kiev" start="false">
+      <Neighbor name="Moscow" />
+      <Neighbor name="Odessa" />
+      <Neighbor name="Romania" />
+      <Neighbor name="Lemborg" />
+      <Neighbor name="Warsaw" />
+    </ArmamentsFacility>
+    <Shipyard name="Odessa" start="true" port="Black Sea">
+      <Neighbors>
+        <Neighbor name="Kiev" />
+        <Neighbor name="Black Sea" />
+        <Neighbor name="Romania" />
+      </Neighbors>
+    </Shipyard>
+  </Nation>
+  <TaxableSeaRegion name="Black Sea">
+    <Neighbors>
+      <Neighbor name="Odessa" />
+      <Neighbor name="Turkey" />
+      <Neighbor name="Eastern Mediterranean Sea" />
+      <Neighbor name="Bulgaria" />
+      <Neighbor name="Romania" />
+    </Neighbors>
+  </TaxableSeaRegion>
+  <TaxableSeaRegion name="Eastern Mediterranean Sea">
+    <Neighbors>
+      <Neighbor name="Turkey" />
+      <Neighbor name="Ionian Sea" />
+      <Neighbor name="Greece" />
+      <Neighbor name="Bulgaria" />
+      <Neighbor name="Black Sea" />
+    </Neighbors>
+  </TaxableSeaRegion>
+  <TaxableSeaRegion name="Ionian Sea">
+    <Neighbors>
+      <Neighbor name="Trieste" />
+      <Neighbor name="West Balkan" />
+      <Neighbor name="Greece" />
+      <Neighbor name="Eastern Mediterranean Sea" />
+      <Neighbor name="Tunis" />
+      <Neighbor name="Western Mediterranean Sea" />
+      <Neighbor name="Naples" />
+      <Neighbor name="Rome" />
+      <Neighbor name="Venice" />
+    </Neighbors>
+  </TaxableSeaRegion>
+  <TaxableSeaRegion name="Western Mediterranean Sea">
+    <Neighbors>
+      <Neighbor name="Genoa" />
+      <Neighbor name="Florence" />
+      <Neighbor name="Rome" />
+      <Neighbor name="Naples" />
+      <Neighbor name="Ionian Sea" />
+      <Neighbor name="Tunis" />
+      <Neighbor name="Algeria" />
+      <Neighbor name="Spain" />
+      <Neighbor name="Marseille" />
+    </Neighbors>
+  </TaxableSeaRegion>
+  <TaxableSeaRegion name="Bay of Biscay">
+    <Neighbors>
+      <Neighbor name="North Atlantic" />
+      <Neighbor name="English Channel" />
+      <Neighbor name="Brest" />
+      <Neighbor name="Bordeaux" />
+      <Neighbor name="Spain" />
+      <Neighbor name="Morocco" />
+      <Neighbor name="Portugal" />
+    </Neighbors>
+  </TaxableSeaRegion>
+  <TaxableSeaRegion name="North Atlantic">
+    <Neighbors>
+      <Neighbor name="North Sea" />
+      <Neighbor name="Edinburgh" />
+      <Neighbor name="Dublin" />
+      <Neighbor name="Liverpool" />
+      <Neighbor name="London" />
+      <Neighbor name="English Channel" />
+      <Neighbor name="Bay of Biscay" />
+    </Neighbors>
+  </TaxableSeaRegion>
+  <TaxableSeaRegion name="English Channel">
+    <Neighbors>
+      <Neighbor name="London" />
+      <Neighbor name="North Sea" />
+      <Neighbor name="Holland" />
+      <Neighbor name="Belgium" />
+      <Neighbor name="Paris" />
+      <Neighbor name="Brest" />
+      <Neighbor name="Bay of Biscay" />
+      <Neighbor name="North Atlantic" />
+    </Neighbors>
+  </TaxableSeaRegion>
+  <TaxableSeaRegion name="North Sea">
+    <Neighbors>
+      <Neighbor name="Norway" />
+      <Neighbor name="Baltic Sea" />
+      <Neighbor name="Denmark" />
+      <Neighbor name="Hamburg" />
+      <Neighbor name="Holland" />
+      <Neighbor name="English Channel" />
+      <Neighbor name="London" />
+      <Neighbor name="Mayfield" />
+      <Neighbor name="Edinburgh" />
+      <Neighbor name="North Atlantic" />
+    </Neighbors>
+  </TaxableSeaRegion>
+  <TaxableSeaRegion name="Baltic Sea">
+    <Neighbors>
+      <Neighbor name="St. Petersburg" />
+      <Neighbor name="Danzig" />
+      <Neighbor name="Berlin" />
+      <Neighbor name="Hamburg" />
+      <Neighbor name="Denmark" />
+      <Neighbor name="North Sea" />
+      <Neighbor name="Norway" />
+      <Neighbor name="Sweden" />
+    </Neighbors>
+  </TaxableSeaRegion>
+  <TaxableLandRegion name="Romania">
+    <Neighbors>
+      <Neighbor name="Kiev" />
+      <Neighbor name="Odessa" />
+      <Neighbor name="Black Sea" />
+      <Neighbor name="Bulgaria" />
+      <Neighbor name="West Balkan" />
+      <Neighbor name="Budapest" />
+      <Neighbor name="Lemborg" />
+    </Neighbors>
+  </TaxableLandRegion>
+  <TaxableLandRegion name="Bulgaria">
+    <Neighbors>
+      <Neighbor name="Romania" />
+      <Neighbor name="Black Sea" />
+      <Neighbor name="Turkey" />
+      <Neighbor name="Eastern Mediterranean Sea" />
+      <Neighbor name="Greece" />
+      <Neighbor name="West Balkan" />
+    </Neighbors>
+  </TaxableLandRegion>
+  <TaxableLandRegion name="Turkey">
+    <Neighbors>
+      <Neighbor name="Black Sea" />
+      <Neighbor name="Eastern Mediterranean Sea" />
+      <Neighbor name="Ionian Sea" />
+      <Neighbor name="West Balkan" />
+    </Neighbors>
+  </TaxableLandRegion>
+  <TaxableLandRegion name="Greece">
+    <Neighbors>
+      <Neighbor name="Bulgaria" />
+      <Neighbor name="Eastern Mediterranean Sea" />
+      <Neighbor name="Ionian Sea" />
+      <Neighbor name="West Balkan" />
+    </Neighbors>
+  </TaxableLandRegion>
+  <TaxableLandRegion name="West Balkan">
+    <Neighbors>
+      <Neighbor name="Budapest" />
+      <Neighbor name="Romania" />
+      <Neighbor name="Bulgaria" />
+      <Neighbor name="Greece" />
+      <Neighbor name="Ionian Sea" />
+      <Neighbor name="Trieste" />
+    </Neighbors>
+  </TaxableLandRegion>
+  <TaxableLandRegion name="Tunis">
+    <Neighbors>
+      <Neighbor name="Western Mediterranean Sea" />
+      <Neighbor name="Ionian Sea" />
+      <Neighbor name="Algeria" />
+    </Neighbors>
+  </TaxableLandRegion>
+  <TaxableLandRegion name="Algeria">
+    <Neighbors>
+      <Neighbor name="Western Mediterranean Sea" />
+      <Neighbor name="Tunis" />
+      <Neighbor name="Morocco" />
+    </Neighbors>
+  </TaxableLandRegion>
+  <TaxableLandRegion name="Morocco">
+    <Neighbors>
+      <Neighbor name="Bay of Biscay" />
+      <Neighbor name="Algeria" />
+    </Neighbors>
+  </TaxableLandRegion>
+  <TaxableLandRegion name="Spain">
+    <Neighbors>
+      <Neighbor name="Bay of Biscay" />
+      <Neighbor name="Bordeaux" />
+      <Neighbor name="Marseille" />
+      <Neighbor name="Western Mediterranean Sea" />
+      <Neighbor name="Portugal" />
+    </Neighbors>
+  </TaxableLandRegion>
+  <TaxableLandRegion name="Portugal">
+    <Neighbors>
+      <Neighbor name="Bay of Biscay" />
+      <Neighbor name="Spain" />
+    </Neighbors>
+  </TaxableLandRegion>
+  <TaxableLandRegion name="Belgium">
+    <Neighbors>
+      <Neighbor name="Holland" />
+      <Neighbor name="Cologne" />
+      <Neighbor name="Munich" />
+      <Neighbor name="Dijon" />
+      <Neighbor name="Paris" />
+      <Neighbor name="English Channel" />
+    </Neighbors>
+  </TaxableLandRegion>
+  <TaxableLandRegion name="Holland">
+    <Neighbors>
+      <Neighbor name="North Sea" />
+      <Neighbor name="Hamburg" />
+      <Neighbor name="Cologne" />
+      <Neighbor name="Belgium" />
+      <Neighbor name="English Channel" />
+    </Neighbors>
+  </TaxableLandRegion>
+  <TaxableLandRegion name="Denmark">
+    <Neighbors>
+      <Neighbor name="North Sea" />
+      <Neighbor name="Baltic Sea" />
+      <Neighbor name="Hamburg" />
+    </Neighbors>
+  </TaxableLandRegion>
+  <TaxableLandRegion name="Norway">
+    <Neighbors>
+      <Neighbor name="Sweden" />
+      <Neighbor name="Baltic Sea" />
+      <Neighbor name="North Sea" />
+    </Neighbors>
+  </TaxableLandRegion>
+  <TaxableLandRegion name="Sweden">
+    <Neighbors>
+      <Neighbor name="Baltic Sea" />
+      <Neighbor name="Norway" />
+    </Neighbors>
+  </TaxableLandRegion>
+</Map>

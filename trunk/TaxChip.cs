@@ -10,7 +10,7 @@ namespace Imperial
     public sealed class TaxChip
     {
         /// <summary>
-        /// The owner of the tax chip.
+        /// The allegiance of the tax chip.
         /// </summary>
         private readonly Nation owner;
 

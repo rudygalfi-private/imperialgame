@@ -315,6 +315,7 @@
       <Neighbor name="Algeria" />
       <Neighbor name="Spain" />
       <Neighbor name="Marseille" />
+      <Neighbor name="Bay of Biscay" />
     </Neighbors>
   </TaxableSeaRegion>
   <TaxableSeaRegion name="Bay of Biscay">
@@ -326,6 +327,7 @@
       <Neighbor name="Spain" />
       <Neighbor name="Morocco" />
       <Neighbor name="Portugal" />
+      <Neighbor name="Western Mediterranean Sea" />
     </Neighbors>
   </TaxableSeaRegion>
   <TaxableSeaRegion name="North Atlantic">

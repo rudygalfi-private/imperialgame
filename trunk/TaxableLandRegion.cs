@@ -20,7 +20,6 @@ namespace Imperial
         /// <param name="definition">The XML definition of this TaxableLandRegion.</param>
         public TaxableLandRegion(System.Xml.XmlNode definition) : base(definition)
         {
-            System.Console.WriteLine("TaxableLandRegion");
         }
     }
 }

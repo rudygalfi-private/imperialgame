@@ -16,22 +16,20 @@ namespace Imperial
         public static void Main(string[] args)
         {
             // Figure out the number of players.
-            GamePlayerCount? allowedCountOfPlayers = null;
+            uint playerCount = 0;
 
             // The number of command line parameters tells us if we have had the number of players defined.
             if (args.Length == 1)
             {
-                allowedCountOfPlayers = Application.PlayerCountFromString(args[0]);
+                playerCount = Application.PlayerCountFromString(args[0]);
             }
 
             System.Console.Write("Absolute path of map file to load: ");
             string mapFilePath = System.Console.ReadLine();
 
-            // Create the game.
-            Game gameToPlay = new Game(mapFilePath, allowedCountOfPlayers ?? GamePlayerCount.Two);
-            
-            // And run it.
-            gameToPlay.Run();
+            // Create the game and run it.
+            Game game = new Game(mapFilePath, playerCount);
+            game.Run();
         }
 
         /// <summary>
@@ -39,42 +37,13 @@ namespace Imperial
         /// </summary>
         /// <param name="stringCountOfPlayers">A string representing the number of players.</param>
         /// <returns>The Allowable PlayerCount corresponding to the given string or null if no match can be found.</returns>
-        public static GamePlayerCount? PlayerCountFromString(string stringCountOfPlayers)
+        public static uint PlayerCountFromString(string playerCountText)
         {
             // We have had the number of players specified. Try reading it.
-            uint convertedCountOfPlayers = 0;
-            bool conversionSucceeded = uint.TryParse(stringCountOfPlayers, out convertedCountOfPlayers);
+            uint playerCount = 0;
+            bool conversionSucceeded = uint.TryParse(playerCountText, out playerCount);
 
-            // If the conversion succeeded, try to match it to a valid player count.
-            GamePlayerCount? matchedCountOfPlayers = null;
-
-            if (conversionSucceeded)
-            {
-                switch (convertedCountOfPlayers)
-                {
-                    case 2:
-                        matchedCountOfPlayers = GamePlayerCount.Two;
-                        break;
-
-                    case 3:
-                        matchedCountOfPlayers = GamePlayerCount.Three;
-                        break;
-
-                    case 4:
-                        matchedCountOfPlayers = GamePlayerCount.Four;
-                        break;
-
-                    case 5:
-                        matchedCountOfPlayers = GamePlayerCount.Five;
-                        break;
-
-                    case 6:
-                        matchedCountOfPlayers = GamePlayerCount.Six;
-                        break;
-                }
-            }
-
-            return matchedCountOfPlayers;
+            return conversionSucceeded ? playerCount : 0;
         }
     }
 }

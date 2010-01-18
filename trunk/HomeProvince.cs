@@ -30,11 +30,9 @@ namespace Imperial
                 if ("true" == ((System.Xml.XmlElement)definition).GetAttribute(HomeProvince.XmlStartFactoryLoadAttribute).ToLower())
                 {
                     this.BuildFactory();
-                    System.Console.WriteLine("\tHas starting factory.");
                 }
                 else if ("false" == ((System.Xml.XmlElement)definition).GetAttribute(HomeProvince.XmlStartFactoryLoadAttribute).ToLower())
                 {
-                    System.Console.WriteLine("\tHas NO starting factory.");
                 }
                 else
                 {
@@ -45,6 +43,15 @@ namespace Imperial
             {
                 //// throw UnspecifiedStartFactoryException
             }
+        }
+
+        public override string ToString()
+        {
+            string result = base.ToString() + " [Home Province] ";
+
+            result += "Has Factory?: " + this.hasFactory;
+
+            return result;
         }
 
         /// <summary>

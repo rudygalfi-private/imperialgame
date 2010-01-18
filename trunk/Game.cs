@@ -5,37 +5,6 @@
 namespace Imperial
 {
     /// <summary>
-    /// Definition of the range of the allowable count of players for a single game.
-    /// </summary>
-    public enum GamePlayerCount
-    {
-        /// <summary>
-        /// Represents two players.
-        /// </summary>
-        Two = 2,
-
-        /// <summary>
-        /// Represents three players.
-        /// </summary>
-        Three = 3,
-
-        /// <summary>
-        /// Represents four players.
-        /// </summary>
-        Four = 4,
-
-        /// <summary>
-        /// Represents five players.
-        /// </summary>
-        Five = 5,
-
-        /// <summary>
-        /// Represents six players.
-        /// </summary>
-        Six = 6
-    }
-
-    /// <summary>
     /// Implements a game defined by its count of players.
     /// </summary>
     public class Game
@@ -43,7 +12,7 @@ namespace Imperial
         /// <summary>
         /// The count of players for this Game.
         /// </summary>
-        private readonly GamePlayerCount playerCount;
+        private readonly uint playerCount;
 
         /// <summary>
         /// The Map for this Game.
@@ -60,29 +29,28 @@ namespace Imperial
         /// </summary>
         /// <param name="mapFilePath">The path to the map file to load.</param>
         /// <param name="playerCount">The number of players for this game.</param>
-        public Game(string mapFilePath, GamePlayerCount playerCount)
+        public Game(string mapFilePath, uint playerCount)
         {
             this.playerCount = playerCount;
 
             System.Xml.XmlDocument mapDefinitionDocument = new System.Xml.XmlDocument();
             mapDefinitionDocument.Load(mapFilePath);
-
             System.Xml.XmlNodeList maps = mapDefinitionDocument.GetElementsByTagName(Map.XmlElement);
 
-            if (1 == maps.Count)
+            if (maps.Count > 0)
             {
                 this.map = new Map(maps.Item(0));
             }
             else
             {
-                //// throw InvalidMapCountException
+                //// throw InvalidMapFileException
             }
         }
 
         /// <summary>
         /// Gets the count of players for this game.
         /// </summary>
-        public GamePlayerCount PlayerCount
+        public uint PlayerCount
         {
             get
             {
@@ -106,6 +74,44 @@ namespace Imperial
         /// </summary>
         public void Run()
         {
+            Nation home = null;
+            System.Console.Write("Nation: ");
+            string nationInput = System.Console.ReadLine();
+
+            Region location = null;
+            System.Console.Write("Location: ");
+            string locationInput = System.Console.ReadLine();
+
+            ////System.Console.WriteLine("NATIONS:");
+            foreach (Nation nation in this.map.Nations)
+            {
+                ////System.Console.WriteLine(nation);
+
+                if (nation.Name == nationInput)
+                {
+                    home = nation;
+                }
+
+                foreach (HomeProvince homeProvince in nation.HomeProvinces)
+                {
+                    if (homeProvince.Name == locationInput)
+                    {
+                        location = homeProvince;
+                    }
+                }
+            }
+
+            ////System.Console.WriteLine("TAXABLE REGIONS:");
+            foreach (TaxableRegion taxableRegion in this.map.TaxableRegions)
+            {
+                ////System.Console.WriteLine(taxableRegion);
+
+                if (taxableRegion.Name == locationInput)
+                {
+                    location = taxableRegion;
+                }
+            }
+
             // Flag to indicate when to exit this application.
             bool quit = false;
 
@@ -113,12 +119,49 @@ namespace Imperial
             uint turnNumber = 0;
 
             // Loop infinitely if we don't want to exit.
-            do
+            while (!quit && null != home)
             {
-                this.ExecuteTurn(turnNumber);
-                ++turnNumber;
+                System.Console.WriteLine("You are in " + location.Name + ".");
+
+                System.Collections.Generic.HashSet<Region> reachableRegions = home.GetRegionsReachableFromRegion(location);
+                System.Collections.Generic.Dictionary<string, Region> reachableRegionNameAssociations = new System.Collections.Generic.Dictionary<string, Region>();
+                foreach (Region reachableRegion in reachableRegions)
+                {
+                    reachableRegionNameAssociations.Add(reachableRegion.Name, reachableRegion);
+                }
+
+                System.Console.Write("You can move to ");
+
+                bool first = true;
+                foreach (System.Collections.Generic.KeyValuePair<string, Region> reachableRegionNameAssociation in reachableRegionNameAssociations)
+                {
+                    //neighbors.Add(neighbor.Name, neighbor);
+                    System.Console.Write((first ? string.Empty : ", ") + reachableRegionNameAssociation.Key);
+                    first = false;
+                }
+
+                System.Console.WriteLine(".");
+
+                do
+                {
+                    System.Console.Write("Go to: ");
+                    locationInput = System.Console.ReadLine();
+
+                    if ("quit" == locationInput.ToLower())
+                    {
+                        quit = true;
+                    }
+                }
+                while (!quit && !reachableRegionNameAssociations.ContainsKey(locationInput));
+
+                if (!quit)
+                {
+                    location = reachableRegionNameAssociations[locationInput];
+
+                    ////this.ExecuteTurn(turnNumber);
+                    ++turnNumber;
+                }
             }
-            while (!quit);
         }
 
         /// <summary>
@@ -127,9 +170,18 @@ namespace Imperial
         /// <param name="turnNumber">The turn to execute.</param>
         private void ExecuteTurn(uint turnNumber)
         {
-            Nation actingNation = this.DiscernActingNation(turnNumber);
-            RondelSpace action = actingNation.SelectRondelSpace();
-            actingNation.ExecuteRondelSpaceAction(action);
+            try
+            {
+                Nation actingNation = this.DiscernActingNation(turnNumber);
+
+                RondelSpace action = actingNation.SelectRondelSpace();
+
+                actingNation.ExecuteRondelSpaceAction(action);
+            }
+            catch (System.Exception e)
+            {
+                System.Console.WriteLine(e.StackTrace);
+            }
         }
 
         /// <summary>
@@ -144,7 +196,16 @@ namespace Imperial
         private Nation DiscernActingNation(uint turnNumber)
         {
             uint nationCount = (uint)this.map.Nations.Count;
-            return this.map.Nations[(int)(turnNumber % nationCount)];
+
+            if (nationCount != 0)
+            {
+                return this.map.Nations[(int)(turnNumber % nationCount)];
+            }
+            else
+            {
+                //// throw NoNationsException
+                return null;
+            }
         }
     }
 }

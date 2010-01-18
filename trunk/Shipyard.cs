@@ -20,9 +20,14 @@ namespace Imperial
         public const string XmlFleetEntryAttribute = "port";
 
         /// <summary>
+        /// A cache of the entry Region for Fleets produced in this HomeProvince.
+        /// </summary>
+        private readonly string cachedFleetEntry;
+
+        /// <summary>
         /// The entry Region for Fleets produced in this HomeProvince.
         /// </summary>
-        private readonly string fleetEntry;
+        private Region fleetEntry;
 
         /// <summary>
         /// Initializes a new instance of the Shipyard class according to the specified definition.
@@ -30,17 +35,33 @@ namespace Imperial
         /// <param name="definition">The XML definition of this Shipyard.</param>
         public Shipyard(System.Xml.XmlNode definition) : base(definition)
         {
-            System.Console.WriteLine("Shipyard");
-
             if (((System.Xml.XmlElement)definition).HasAttribute(Shipyard.XmlFleetEntryAttribute))
             {
-                this.fleetEntry = ((System.Xml.XmlElement)definition).GetAttribute(Shipyard.XmlFleetEntryAttribute);
-                System.Console.WriteLine("\tFleet entry: {0}", this.fleetEntry);
+                this.cachedFleetEntry = ((System.Xml.XmlElement)definition).GetAttribute(Shipyard.XmlFleetEntryAttribute);
             }
             else
             {
                 //// throw UnspecifiedShipEntranceException
             }
+        }
+
+        public override string ToString()
+        {
+            string result = base.ToString() + " [Shipyard] ";
+
+            result += "Fleet Entry: " + this.fleetEntry;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Link to the fleet entry of this Shipyard.
+        /// </summary>
+        /// <param name="regionNameAssociations">A lookup that associates a Region's name with the Region.</param>
+        /// <remarks>To be used after constructing this Shipyard to establish a link to the fleet entry of this Shipyard.</remarks>
+        public void EstablishLinkToFleetEntry(System.Collections.Generic.Dictionary<string, Region> regionNameAssociations)
+        {
+            this.fleetEntry = regionNameAssociations[this.cachedFleetEntry];
         }
 
         /// <summary>

@@ -20,7 +20,13 @@ namespace Imperial
         /// <param name="definition">The XML definition of this ArmamentsFacility.</param>
         public ArmamentsFacility(System.Xml.XmlNode definition) : base(definition)
         {
-            System.Console.WriteLine(ArmamentsFacility.XmlElement);
+        }
+
+        public override string ToString()
+        {
+            string result = base.ToString() + " [Armaments Facility]";
+
+            return result;
         }
 
         /// <summary>

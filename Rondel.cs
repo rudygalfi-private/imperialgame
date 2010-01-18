@@ -112,7 +112,7 @@ namespace Imperial
         /// <param name="nation">The Nation that is moving.</param>
         /// <param name="newPosition">The new Rondel space to move to.</param>
         /// <returns>Whether the move was successful.</returns>
-        public bool Move(Nation nation, RondelSpace newPosition)
+        public void Move(Nation nation, RondelSpace newPosition)
         {
             // Check if we have a position for this Nation on the Rondel.
             if (this.nationPositions.ContainsKey(nation))
@@ -131,17 +131,11 @@ namespace Imperial
                     {
                         // If so, we can move to the new space.
                         this.nationPositions[nation] = newPosition;
-                        return true;
                     }
                     else
                     {
                         // If not, ensure that we didn't pay anything.
-                        if (0 == movementPayment)
-                        {
-                            // We don't have enough money to move to this space.
-                            return false;
-                        }
-                        else
+                        if (0 != movementPayment)
                         {
                             // We paid some money but not the amount we were supposed to.
                             //// SomeException
@@ -150,17 +144,14 @@ namespace Imperial
                 }
                 else
                 {
-                    return false;
+                    //// throw UnallowedRondelMovementException
                 }
-
-                return true; // or false!
             }
             else
             {
                 // This is the first move, so we have nothing so far.
                 // Allow a move to any space.
                 this.nationPositions[nation] = newPosition;
-                return true;
             }
         }
 

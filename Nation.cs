@@ -61,6 +61,10 @@ namespace Imperial
         /// </summary>
         private Player leader = null;
 
+        private readonly uint taxChipQuantity = 15;
+
+        private readonly System.Collections.Generic.Stack<TaxChip> taxChips = new System.Collections.Generic.Stack<TaxChip>();
+
         /// <summary>
         /// The power factor of this Nation.
         /// </summary>
@@ -75,7 +79,6 @@ namespace Imperial
             if (((System.Xml.XmlElement)definition).HasAttribute(Nation.XmlNameAttribute))
             {
                 this.name = ((System.Xml.XmlElement)definition).GetAttribute(Nation.XmlNameAttribute);
-                System.Console.WriteLine("\tName: {0}", this.name);
             }
             else
             {
@@ -94,6 +97,11 @@ namespace Imperial
             {
                 ArmamentsFacility loadedArmamentsFacility = new ArmamentsFacility(armamentsFacilityDefinition);
                 this.homeProvinces.Add(loadedArmamentsFacility);
+            }
+
+            for (uint count = 0; count < this.taxChipQuantity; ++count)
+            {
+                this.taxChips.Push(new TaxChip(this));
             }
         }
 
@@ -150,6 +158,26 @@ namespace Imperial
             {
                 return this.powerFactor;
             }
+        }
+
+        public override string ToString()
+        {
+            string result = "[Nation] ";
+
+            result += "Name: " + this.Name + ", ";
+
+            result += "Home Provinces: { ";
+            bool first = true;
+            foreach (HomeProvince homeProvince in this.HomeProvinces)
+            {
+                result += (first ? string.Empty : ", ") + homeProvince;
+                first = false;
+            }
+            result += " }, ";
+
+            result += "Treasury: " + this.Treasury.Balance;
+
+            return result;
         }
 
         /// <summary>
@@ -255,6 +283,152 @@ namespace Imperial
             // Collect taxes
         }
 
+        public System.Collections.Generic.HashSet<Region> GetRegionsReachableFromRegion(Region origin)
+        {
+            System.Collections.Generic.HashSet<Region> reachableRegions = new System.Collections.Generic.HashSet<Region>();
+
+            // Can stay put in current region.
+            reachableRegions.Add(origin);
+
+            // Check if we're starting in a HomeProvince within this Nation.
+            if (origin is HomeProvince && this.HomeProvinces.Contains((HomeProvince)origin))
+            {
+                // We're starting within this Nation.
+                // All unoccupied HomeProvinces are reachable via railroad.
+                System.Collections.Generic.HashSet<Region> railroadReachableRegions = new System.Collections.Generic.HashSet<Region>();
+                railroadReachableRegions.Add(origin);
+                foreach (HomeProvince homeProvince in this.HomeProvinces)
+                {
+                    if (this.AllowsTravelViaRailroadBetweenRegions((HomeProvince)origin, homeProvince))
+                    {
+                        railroadReachableRegions.Add(homeProvince);
+                        reachableRegions.Add(homeProvince);
+                    }
+                }
+
+                // Collect together all of the Regions that are reachable in a single move.
+                foreach (Region railroadReachableRegion in railroadReachableRegions)
+                {
+                    foreach (Region neighbor in railroadReachableRegion.Neighbors)
+                    {
+                        reachableRegions.Add(neighbor);
+                    }
+                }
+            }
+            else
+            {
+                // We're starting outside of this Nation.
+                // Collect together all of the Regions that are reachable because they neighbor our starting location.
+                System.Collections.Generic.HashSet<Region> neighboringReachableRegions = this.GetNeighboringReachableRegions(origin);
+                neighboringReachableRegions.Add(origin);
+
+                // Collect together all of the regions that reachable via railroad from a HomeProvince.
+                foreach (Region neighboringReachableRegion in neighboringReachableRegions)
+                {
+                    if (this.RegionIsMyHomeProvince(neighboringReachableRegion))
+                    {
+                        foreach (HomeProvince homeProvince in this.HomeProvinces)
+                        {
+                            if (this.AllowsTravelViaRailroadBetweenRegions((HomeProvince)neighboringReachableRegion, homeProvince))
+                            {
+                                reachableRegions.Add(homeProvince);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return reachableRegions;
+        }
+
+        private bool RegionIsMyHomeProvince(Region region)
+        {
+            return region is HomeProvince && this.HomeProvinces.Contains((HomeProvince)region);
+        }
+
+        private System.Collections.Generic.HashSet<Region> GetNeighboringReachableRegions(Region origin)
+        {
+            System.Collections.Generic.HashSet<Region> neighboringReachableRegions = new System.Collections.Generic.HashSet<Region>();
+
+            foreach (Region neighbor in origin.Neighbors)
+            {
+                neighboringReachableRegions.Add(neighbor);
+            }
+
+            return neighboringReachableRegions;
+        }
+
+        private System.Collections.Generic.HashSet<Region> GetRailroadReachableRegions(HomeProvince origin)
+        {
+            System.Collections.Generic.HashSet<Region> railroadReachableRegions = new System.Collections.Generic.HashSet<Region>();
+
+            foreach (HomeProvince homeProvince in this.HomeProvinces)
+            {
+                if (this.AllowsTravelViaRailroadBetweenRegions(origin, homeProvince))
+                {
+                    railroadReachableRegions.Add(homeProvince);
+                }
+            }
+
+            return railroadReachableRegions;
+        }
+
+        private bool AllowsTravelViaRailroadBetweenRegions(HomeProvince origin, HomeProvince destination)
+        {
+            System.Collections.Generic.HashSet<HomeProvince> unoccupiedHomeProvinces = new System.Collections.Generic.HashSet<HomeProvince>(this.HomeProvinces);
+            unoccupiedHomeProvinces.RemoveWhere(this.HomeProvinceIsOccupiedByHostileUnit);
+
+            // If the origin or destination is occupied, we can't get there by railroad.
+            if (unoccupiedHomeProvinces.Contains(origin) && unoccupiedHomeProvinces.Contains(destination))
+            {
+                // Verify that there is at least one unoccupied path joining the origin and destination.
+                System.Collections.Generic.Queue<HomeProvince> homeProvinces = new System.Collections.Generic.Queue<HomeProvince>();
+                System.Collections.Generic.HashSet<HomeProvince> visitedHomeProvinces = new System.Collections.Generic.HashSet<HomeProvince>();
+
+                homeProvinces.Enqueue(origin);
+                while (0 < homeProvinces.Count)
+                {
+                    HomeProvince currentHomeProvince = homeProvinces.Dequeue();
+
+                    if (currentHomeProvince == destination)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        visitedHomeProvinces.Add(currentHomeProvince);
+
+                        foreach (Region neighbor in currentHomeProvince.Neighbors)
+                        {
+                            if (neighbor is HomeProvince && !visitedHomeProvinces.Contains((HomeProvince)neighbor))
+                            {
+                                homeProvinces.Enqueue((HomeProvince)neighbor);
+                            }
+                        }
+                    }
+                }
+
+                return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool HomeProvinceIsOccupiedByHostileUnit(HomeProvince homeProvince)
+        {
+            foreach (System.Collections.Generic.KeyValuePair<Nation, Military> military in homeProvince.Militaries)
+            {
+                if (military.Value.IsHostileToNation(this))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         /// <summary>
         /// Calculates the payout range for an Investor action.
         /// </summary>
@@ -266,6 +440,30 @@ namespace Imperial
             result.Maximum = 0;
 
             return result;
+        }
+
+        public TaxChip DispenseTaxChip()
+        {
+            if (this.taxChips.Count > 0)
+            {
+                return this.taxChips.Pop();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public void CollectTaxChip(TaxChip taxChip)
+        {
+            if (null != taxChip)
+            {
+                this.taxChips.Push(taxChip);
+            }
+            else
+            {
+                //// throw NullTaxChipException
+            }
         }
     }
 }

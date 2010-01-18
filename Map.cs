@@ -74,7 +74,14 @@ namespace Imperial
             // iterate through them all again and link the neighbors.
             foreach (System.Collections.Generic.KeyValuePair<string, Region> regionNameAssociation in regionNameAssociations)
             {
-                regionNameAssociation.Value.ConnectToNeighbors(regionNameAssociations);
+                Region region = regionNameAssociation.Value;
+                region.EstablishLinkToNeighbors(regionNameAssociations);
+
+                if (region is Shipyard)
+                {
+                    Shipyard shipyard = (Shipyard)region;
+                    shipyard.EstablishLinkToFleetEntry(regionNameAssociations);
+                }
             }
         }
 

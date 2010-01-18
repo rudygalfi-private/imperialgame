@@ -17,7 +17,7 @@ namespace Imperial
         /// <summary>
         /// Armies in the Military.
         /// </summary>
-        private System.Collections.Generic.List<Army> armies = new System.Collections.Generic.List<Army>();
+        private System.Collections.Generic.List<Army> armies = new System.Collections.Generic.List<Army>(); 
 
         /// <summary>
         /// Adds the specified Unit to the Military.
@@ -32,6 +32,10 @@ namespace Imperial
             else if (unit is Army)
             {
                 this.armies.Add((Army)unit);
+            }
+            else
+            {
+                //// throw UnknownUnitTypeException
             }
         }
 
@@ -49,6 +53,36 @@ namespace Imperial
             {
                 this.armies.Remove((Army)unit);
             }
+            else
+            {
+                //// throw UnknownUnitTypeException
+            }
+        }
+
+        public bool IsHostileToNation(Nation nation)
+        {
+            foreach (Fleet fleet in this.fleets)
+            {
+                if (!fleet.IsAlignedWithNation(nation) && fleet.IsHostile)
+                {
+                    return true;
+                }
+            }
+
+            foreach (Army army in this.armies)
+            {
+                if (!army.IsAlignedWithNation(nation) && army.IsHostile)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public bool IsEmpty()
+        {
+            return 0 == this.fleets.Count && 0 == this.armies.Count;
         }
     }
 }

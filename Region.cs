@@ -40,7 +40,7 @@ namespace Imperial
         private readonly System.Collections.Generic.HashSet<Region> neighbors = new System.Collections.Generic.HashSet<Region>();
 
         /// <summary>
-        /// The domestic Military currently located in this Region.
+        /// The Militaries currently located in this Region.
         /// </summary>
         private readonly System.Collections.Generic.Dictionary<Nation, Military> militaries = new System.Collections.Generic.Dictionary<Nation, Military>();
 
@@ -53,7 +53,6 @@ namespace Imperial
             if (((System.Xml.XmlElement)definition).HasAttribute(Region.XmlNameAttribute))
             {
                 this.name = ((System.Xml.XmlElement)definition).GetAttribute(Region.XmlNameAttribute);
-                System.Console.WriteLine("\tName: {0}", this.name);
             }
             else
             {
@@ -67,7 +66,6 @@ namespace Imperial
                 {
                     string neighborName = ((System.Xml.XmlElement)neighborDefinition).GetAttribute(Region.XmlNeighborNameAttribute);
                     this.cachedNeighborNames.Add(neighborName);
-                    System.Console.WriteLine("\t\tNeighbor: {0}", neighborName);
                 }
                 else
                 {
@@ -87,10 +85,18 @@ namespace Imperial
             }
         }
 
+        public System.Collections.Generic.HashSet<Region> Neighbors
+        {
+            get
+            {
+                return this.neighbors;
+            }
+        }
+
         /// <summary>
         /// Gets the Militaries in this Region.
         /// </summary>
-        protected System.Collections.Generic.Dictionary<Nation, Military> Militaries
+        public System.Collections.Generic.Dictionary<Nation, Military> Militaries
         {
             get
             {
@@ -98,11 +104,30 @@ namespace Imperial
             }
         }
 
+        public override string ToString()
+        {
+            string result = "[Region] ";
+
+            result += "Name: " + this.name + ", ";
+
+            result += "Neighbors: " + "{ ";
+            bool first = true;
+            foreach (Region neighbor in this.neighbors)
+            {
+                result += (first ? string.Empty : ", ") + neighbor.Name;
+                first = false;
+            }
+            result += " }";
+
+            return result;
+        }
+
         /// <summary>
-        /// Populates the list of neighbors of this Region.
+        /// Links to the neighbors of this Region.
         /// </summary>
         /// <param name="regionNameAssociations">A lookup that associates a Region's name with the Region.</param>
-        public void ConnectToNeighbors(System.Collections.Generic.Dictionary<string, Region> regionNameAssociations)
+        /// <remarks>To be used after constructing this Region to establish links to the neighbors of this Region.</remarks>
+        public void EstablishLinkToNeighbors(System.Collections.Generic.Dictionary<string, Region> regionNameAssociations)
         {
             foreach (string cachedNeighborName in this.cachedNeighborNames)
             {

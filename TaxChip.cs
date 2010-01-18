@@ -22,5 +22,16 @@ namespace Imperial
         {
             this.owner = nation;
         }
+
+        /// <summary>
+        /// The owner of this Nation.
+        /// </summary>
+        public Nation Owner
+        {
+            get
+            {
+                return this.owner;
+            }
+        }
     }
 }

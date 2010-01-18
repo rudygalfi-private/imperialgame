@@ -14,6 +14,8 @@ namespace Imperial
         /// </summary>
         private readonly Nation allegiance;
 
+        private bool isHostile = false;
+
         /// <summary>
         /// Whether this unit has used its move for the turn.
         /// </summary>
@@ -26,6 +28,24 @@ namespace Imperial
         protected Unit(Nation allegiance)
         {
             this.allegiance = allegiance;
+        }
+
+        public bool IsHostile
+        {
+            get
+            {
+                return this.isHostile;
+            }
+
+            set
+            {
+                this.isHostile = value;
+            }
+        }
+
+        public bool IsAlignedWithNation(Nation nation)
+        {
+            return this.allegiance == nation;
         }
 
         /// <summary>
